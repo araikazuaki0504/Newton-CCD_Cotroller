@@ -1,0 +1,68 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\CCD_controller_windows_form(Newton)\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|c:\\ccd_controller_windows_form(newton)\\ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|C:\\CCD_controller_windows_form(Newton)\\ccd_controller_windows_form\\andorsdk\\atmcd64cs.andorsdk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\andorsdk\\atmcd64cs.andorsdk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|C:\\CCD_controller_windows_form(Newton)\\ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ATMCD64CS.AndorSDK.cs",
+              "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\AndorSDK\\ATMCD64CS.AndorSDK.cs",
+              "RelativeDocumentMoniker": "CCD_controller_windows_form\\AndorSDK\\ATMCD64CS.AndorSDK.cs",
+              "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\AndorSDK\\ATMCD64CS.AndorSDK.cs",
+              "RelativeToolTip": "CCD_controller_windows_form\\AndorSDK\\ATMCD64CS.AndorSDK.cs",
+              "ViewState": "AgIAABcTAAAAAAAAAAAowCsTAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-20T09:30:33.476Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "mainForm.cs",
+              "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs",
+              "RelativeDocumentMoniker": "CCD_controller_windows_form\\mainForm.cs",
+              "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs",
+              "RelativeToolTip": "CCD_controller_windows_form\\mainForm.cs",
+              "ViewState": "AgIAAOwBAAAAAAAAAAAYwPUBAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-20T08:34:41.62Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "mainForm.cs [\u30C7\u30B6\u30A4\u30F3]",
+              "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs",
+              "RelativeDocumentMoniker": "CCD_controller_windows_form\\mainForm.cs",
+              "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs [\u30C7\u30B6\u30A4\u30F3]",
+              "RelativeToolTip": "CCD_controller_windows_form\\mainForm.cs [\u30C7\u30B6\u30A4\u30F3]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-20T08:32:29.109Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
