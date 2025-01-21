@@ -3,28 +3,12 @@
   "WorkspaceRootPath": "C:\\CCD_controller_windows_form(Newton)\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|c:\\ccd_controller_windows_form(newton)\\ccd_controller_windows_form\\triggermodesettingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\triggermodesettingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|c:\\ccd_controller_windows_form(newton)\\ccd_controller_windows_form\\triggermodesettingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\triggermodesettingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|c:\\ccd_controller_windows_form(newton)\\ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|C:\\CCD_controller_windows_form(Newton)\\ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|c:\\ccd_controller_windows_form(newton)\\ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|c:\\ccd_controller_windows_form(newton)\\ccd_controller_windows_form\\imageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\imageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|c:\\ccd_controller_windows_form(newton)\\ccd_controller_windows_form\\imageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\imageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,77 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TriggerModeSettingForm.cs",
-              "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\TriggerModeSettingForm.cs",
-              "RelativeDocumentMoniker": "CCD_controller_windows_form\\TriggerModeSettingForm.cs",
-              "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\TriggerModeSettingForm.cs",
-              "RelativeToolTip": "CCD_controller_windows_form\\TriggerModeSettingForm.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAAABgAAAAOAAAAAAAAAA==",
+              "Title": "mainForm.cs",
+              "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs",
+              "RelativeDocumentMoniker": "CCD_controller_windows_form\\mainForm.cs",
+              "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs",
+              "RelativeToolTip": "CCD_controller_windows_form\\mainForm.cs",
+              "ViewState": "AgIAALcBAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-20T05:54:00.247Z",
+              "WhenOpened": "2025-01-21T02:56:44.925Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "TriggerModeSettingForm.cs [\u30C7\u30B6\u30A4\u30F3]",
-              "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\TriggerModeSettingForm.cs",
-              "RelativeDocumentMoniker": "CCD_controller_windows_form\\TriggerModeSettingForm.cs",
-              "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\TriggerModeSettingForm.cs [\u30C7\u30B6\u30A4\u30F3]",
-              "RelativeToolTip": "CCD_controller_windows_form\\TriggerModeSettingForm.cs [\u30C7\u30B6\u30A4\u30F3]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-20T05:53:55.7Z",
-              "EditorCaption": " [\u30C7\u30B6\u30A4\u30F3]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ImageForm.cs",
-              "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\ImageForm.cs",
-              "RelativeDocumentMoniker": "CCD_controller_windows_form\\ImageForm.cs",
-              "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\ImageForm.cs",
-              "RelativeToolTip": "CCD_controller_windows_form\\ImageForm.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAAwEIAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-20T02:19:13.997Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ImageForm.cs [\u30C7\u30B6\u30A4\u30F3]",
-              "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\ImageForm.cs",
-              "RelativeDocumentMoniker": "CCD_controller_windows_form\\ImageForm.cs",
-              "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\ImageForm.cs [\u30C7\u30B6\u30A4\u30F3]",
-              "RelativeToolTip": "CCD_controller_windows_form\\ImageForm.cs [\u30C7\u30B6\u30A4\u30F3]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-20T02:19:11.262Z",
-              "EditorCaption": " [\u30C7\u30B6\u30A4\u30F3]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "mainForm.cs [\u30C7\u30B6\u30A4\u30F3]",
               "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs",
               "RelativeDocumentMoniker": "CCD_controller_windows_form\\mainForm.cs",
               "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs [\u30C7\u30B6\u30A4\u30F3]",
               "RelativeToolTip": "CCD_controller_windows_form\\mainForm.cs [\u30C7\u30B6\u30A4\u30F3]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-14T07:53:36.174Z",
+              "WhenOpened": "2025-01-21T02:56:42.175Z",
               "EditorCaption": " [\u30C7\u30B6\u30A4\u30F3]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "mainForm.cs",
-              "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs",
-              "RelativeDocumentMoniker": "CCD_controller_windows_form\\mainForm.cs",
-              "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs",
-              "RelativeToolTip": "CCD_controller_windows_form\\mainForm.cs",
-              "ViewState": "AgIAAA0DAAAAAAAAAAAcwB8DAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-14T07:45:45.185Z",
-              "EditorCaption": ""
             }
           ]
         }
