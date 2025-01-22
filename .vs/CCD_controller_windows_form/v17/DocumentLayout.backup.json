@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\CCD_controller_windows_form(Newton)\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|c:\\ccd_controller_windows_form(newton)\\ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|c:\\ccd_controller_windows_form(newton)\\ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|C:\\CCD_controller_windows_form(Newton)\\ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|C:\\CCD_controller_windows_form(Newton)\\ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7086DFE-6245-4CA9-8EE0-C0083FB27263}|CCD_controller_windows_form\\CCD_controller_windows_form.csproj|solutionrelative:ccd_controller_windows_form\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,27 +26,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "mainForm.cs",
               "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs",
               "RelativeDocumentMoniker": "CCD_controller_windows_form\\mainForm.cs",
               "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs",
               "RelativeToolTip": "CCD_controller_windows_form\\mainForm.cs",
-              "ViewState": "AgIAABgCAAAAAAAAAAAWwJoBAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAANMBAAAAAAAAAAAmwEsDAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-22T08:51:10.033Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "mainForm.cs [\u30C7\u30B6\u30A4\u30F3]",
               "DocumentMoniker": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs",
               "RelativeDocumentMoniker": "CCD_controller_windows_form\\mainForm.cs",
               "ToolTip": "C:\\CCD_controller_windows_form(Newton)\\CCD_controller_windows_form\\mainForm.cs [\u30C7\u30B6\u30A4\u30F3]",
               "RelativeToolTip": "CCD_controller_windows_form\\mainForm.cs [\u30C7\u30B6\u30A4\u30F3]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T08:49:23.228Z"
+              "WhenOpened": "2025-01-22T08:49:23.228Z",
+              "EditorCaption": " [\u30C7\u30B6\u30A4\u30F3]"
             }
           ]
         }
