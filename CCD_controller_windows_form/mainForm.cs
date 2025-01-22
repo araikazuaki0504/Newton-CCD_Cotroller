@@ -397,6 +397,9 @@ namespace CCD_controller_windows_form
         {
             int Status = 0;
             int frame_num = 0;
+            float exposure_tim = 0;
+            float accumulat_time = 0;
+            float kinetic_time = 0;
 
             Temperature_timer.Stop();
             Temperature_timer.Enabled = false;
@@ -439,12 +442,10 @@ namespace CCD_controller_windows_form
                 }
                 else
                 {
-                    float read_out_time = 0;
-
-                    errorValue = AndorSDK.GetReadOutTime(ref read_out_time);
-                    if (errorValue != AndorSDK.DRV_SUCCESS)
+                    errorValue = AndorSDK.GetAcquisitionTimings(ref exposure_tim, ref accumulat_time, ref kinetic_time);
+                    if(errorValue != AndorSDK.DRV_SUCCESS)
                     {
-                        MessageBox.Show("読み出し時間を取得できませんでした。", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("AcqusitionTimingを取得できませんでした。", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         Temperature_timer.Enabled = true;
                         Temperature_timer.Start();
                         bttn_Acquire_Frame.Enabled = true;
@@ -453,12 +454,14 @@ namespace CCD_controller_windows_form
                         return;
                     }
 
+                    float TimeOut = exposure_tim + accumulat_time + kinetic_time;
+
                     while ((nmrcUpDwn_Number_of_Frame.Value > frame_num || chckBx_continuous.Checked) && !exposure_tokenSource.IsCancellationRequested)
                     {
                         errorValue = AndorSDK.StartAcquisition();
                         if (errorValue != AndorSDK.DRV_SUCCESS)
                         {
-                                MessageBox.Show($"{frame_num}回目の測定を開始できませんでした。", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show($"{frame_num}回目の測定を開始できませんでした。", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             Temperature_timer.Enabled = true;
                             Temperature_timer.Start();
                             bttn_Acquire_Frame.Enabled = true;
@@ -469,7 +472,7 @@ namespace CCD_controller_windows_form
 
                             try
                             {
-                                await Task.Delay(Convert.ToInt32(read_out_time), exposure_tokenSource.Token);
+                                await Task.Delay(Convert.ToInt32(TimeOut), exposure_tokenSource.Token);
                             }
                             catch
                             {
@@ -838,7 +841,7 @@ namespace CCD_controller_windows_form
 
             try
             {
-                await Task.Delay(100);
+                await Task.Delay(10);
             }
             catch
             {
