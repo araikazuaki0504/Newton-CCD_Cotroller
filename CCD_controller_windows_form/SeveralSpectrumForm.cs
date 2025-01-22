@@ -14,18 +14,18 @@ namespace CCD_controller_windows_form
 {
     public partial class SeveralSpectrumForm : Form
     {
-        private int[] _Spectrum_Datum;
+        private double[] _Spectrum_Datum;
         private int[] _Linspace_forX_Axis;
         private int _Spectrum_qty;
         private int _Spectrum_X_Size;
 
-        public SeveralSpectrumForm(int[,] SpectrumDatum)
+        public SeveralSpectrumForm(double[] SpectrumDatum, int colunm, int row)
         {
             InitializeComponent();
 
-            _Spectrum_Datum = SpectrumDatum.Cast<int>().ToArray<int>();
-            _Spectrum_qty = SpectrumDatum.GetLength(0);
-            _Spectrum_X_Size = SpectrumDatum.GetLength(1);
+            _Spectrum_Datum = (double[])SpectrumDatum.Clone();
+            _Spectrum_qty = colunm;
+            _Spectrum_X_Size = row;
             _Linspace_forX_Axis = new int[_Spectrum_X_Size];
             for (int i = 0; i <_Spectrum_X_Size; i++) _Linspace_forX_Axis[i] = i;
             showSpectrum();
@@ -42,22 +42,23 @@ namespace CCD_controller_windows_form
 
             for (int i = 0; i < _Spectrum_qty; i++)
             {
-                int[] tmp_Row_Data = new int[_Spectrum_X_Size];
+                double[] tmp_Row_Data = new double[_Spectrum_X_Size];
                 Array.Copy(_Spectrum_Datum, i * _Spectrum_X_Size, tmp_Row_Data, 0, _Spectrum_X_Size);
 
-                int Max_Row_Data = tmp_Row_Data.Max();
-                int Min_Row_Data = tmp_Row_Data.Min();
+                double Max_Row_Data = tmp_Row_Data.Max();
+                double Min_Row_Data = tmp_Row_Data.Min();
 
-                int MaxData_digit = (int)Math.Log10(Max_Row_Data);
-                int MinData_digit = (int)Math.Log10(Min_Row_Data);
+                double MaxData_digit = (int)Math.Log10(Max_Row_Data);
+                double MinData_digit = (int)Math.Log10(Min_Row_Data);
 
-                int axisY_Max = 0;
-                int axisY_Min = 0;
+                double axisY_Max = 0;
+                double axisY_Min = 0;
 
                 if (MaxData_digit > 3) axisY_Max = (Max_Row_Data - Max_Row_Data % (int)Math.Pow(10, MaxData_digit - 2)) + (int)Math.Pow(10, MaxData_digit - 2);
                 else axisY_Max = (Max_Row_Data - Max_Row_Data % (int)Math.Pow(10, MaxData_digit - 1)) + (int)Math.Pow(10, MaxData_digit - 1);
 
-                if (MinData_digit > 3)axisY_Min = (Min_Row_Data - Min_Row_Data % (int)Math.Pow(10, MinData_digit - 2)) - (int)Math.Pow(10, MinData_digit - 2);
+                if (MinData_digit > 3) axisY_Min = (Min_Row_Data - Min_Row_Data % (int)Math.Pow(10, MinData_digit - 2)) - (int)Math.Pow(10, MinData_digit - 2);
+                else if (MinData_digit < 1) axisY_Min = 0;
                 else axisY_Min = (Min_Row_Data - Min_Row_Data % (int)Math.Pow(10, MinData_digit - 1)) - (int)Math.Pow(10, MinData_digit - 1);
 
 

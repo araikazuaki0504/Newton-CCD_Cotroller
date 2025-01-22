@@ -24,7 +24,7 @@ namespace CCD_controller_windows_form
             _Image_Width = CCD_Image.Width;
             _Image_Height = CCD_Image.Height;
 
-            this.ClientSize = new Size(1024, 132);
+            this.ClientSize = new Size(800, 200);
             this.pctrbx_CCD_Image.Size = this.ClientSize;
 
             this.pctrbx_CCD_Image.Image = CCD_Image;

@@ -140,13 +140,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OpenMPSupport>true</OpenMPSupport>
-      <AdditionalIncludeDirectories>"C:\ResearchPrograms\CCD_controller_windows_form\OpenBLAS-0.3.27-x64\include"</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"C:\CCD_controller_windows_form(Toucan)\OpenBLAS-0.3.27-x64\include"</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>"C:\ResearchPrograms\CCD_controller_windows_form\OpenBLAS-0.3.27-x64\lib"</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>"C:\CCD_controller_windows_form(Toucan)\OpenBLAS-0.3.27-x64\lib"</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);libopenblas.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -158,7 +160,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>"C:\ResearchPrograms\CCD_controller_windows_form\OpenBLAS-0.3.27-x64\include"</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"C:\CCD_controller_windows_form(Newton)\OpenBLAS-0.3.27-x64\include"</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,7 +168,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>"C:\ResearchPrograms\CCD_controller_windows_form\OpenBLAS-0.3.27-x64\lib"</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>"C:\CCD_controller_windows_form(Newton)\OpenBLAS-0.3.27-x64\lib"</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);libopenblas.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
