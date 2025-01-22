@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "新しいプロファイル",
+    "Projects": [
+      {
+        "Path": "CCD_controller_windows_form\\CCD_controller_windows_form.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

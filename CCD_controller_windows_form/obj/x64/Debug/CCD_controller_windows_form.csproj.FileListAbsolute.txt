@@ -48,8 +48,8 @@ C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\obj\x64\Debug
 C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\obj\x64\Debug\CCD_controller_windows_form.Properties.Resources.resources
 C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\obj\x64\Debug\CCD_controller_windows_form.SerialFiberAcquisitionForm.resources
 C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\obj\x64\Debug\CCD_controller_windows_form.SeveralSpectrumForm.resources
+C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\obj\x64\Debug\CCD_controller_windows_form.TriggerModeSettingForm.resources
 C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\obj\x64\Debug\CCD_controller_windows_form.csproj.GenerateResource.cache
 C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\obj\x64\Debug\CCD_controller_windows_form.csproj.CoreCompileInputs.cache
 C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\obj\x64\Debug\CCD_controller_windows_form.exe
 C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\obj\x64\Debug\CCD_controller_windows_form.pdb
-C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\obj\x64\Debug\CCD_controller_windows_form.TriggerModeSettingForm.resources

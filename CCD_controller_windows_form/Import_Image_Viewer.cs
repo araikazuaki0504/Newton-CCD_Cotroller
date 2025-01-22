@@ -68,7 +68,7 @@ namespace CCD_controller_windows_form
                 {
                     int num4 = i * width + j;
                     int num5 = i * width * num + j * num;
-                    double a = ((num3 == num2) ? ((double)((inBuffer[num4] - num2) * 16384)) : ((double)((inBuffer[num4] - num2) * 16384 / (num3 - num2))));
+                    double a = ((num3 == num2) ? ((double)((inBuffer[num4] - num2) * 8192)) : ((double)((inBuffer[num4] - num2) * 8192 / (num3 - num2))));
                     ushort value = (ushort)Math.Round(a);
                     byte b = BitConverter.GetBytes(value)[1];
                     byte b2 = BitConverter.GetBytes(value)[0];

@@ -96,7 +96,7 @@ double get_miniumAlphaWithInds(double* x, double* s, bool* inds, int inds_size)
 
 int lstsq(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Matrix_B, int Matrix_B_colunm_, int Matrix_B_row_ ,lstsq_result* cal_result)
 {
-    std::cout << "start Least square..." << std::endl;
+    //std::cout << "start Least square..." << std::endl;
     //showMatrix(Matrix_A,Matrix_A_colunm_,Matrix_A_row_);
     //showMatrix(Matrix_B,Matrix_B_colunm_,Matrix_B_row_);
 
@@ -107,8 +107,8 @@ int lstsq(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Ma
 
     //疑似逆行列を求める
     Pseudo_inverse(Matrix_A,Matrix_A_colunm_,Matrix_A_row_,Pinv_Matrix);
-    showMatrix(Pinv_Matrix,Matrix_A_row_,Matrix_A_colunm_);
-    showMatrix(Matrix_B, Matrix_B_colunm_, Matrix_B_row_);
+    //showMatrix(Pinv_Matrix,Matrix_A_row_,Matrix_A_colunm_);
+    //showMatrix(Matrix_B, Matrix_B_colunm_, Matrix_B_row_);
 
     product(Pinv_Matrix,Matrix_A_row_,Matrix_A_colunm_,Matrix_B,Matrix_B_colunm_,Matrix_B_row_,cal_result->_lstsq_solution);
     
@@ -250,7 +250,7 @@ int lstsq(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Ma
     //delete[] Matrix_t;
     //delete[] Matrix_buffer;
     //delete[] eigVal;
-    std::cout << "end Least square..." << std::endl;
+    //std::cout << "end Least square..." << std::endl;
     return 1;
 }
 
@@ -350,7 +350,7 @@ int lstsq(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Ma
 
 int nnls(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Matrix_B, int Matrix_B_colunm_, int Matrix_B_row_,lstsq_result* cal_result)
 {
-    std::cout << "start None Negative Least square..." << std::endl;
+    //std::cout << "start None Negative Least square..." << std::endl;
     double* Matrix_A_T = new double[Matrix_A_row_ * Matrix_A_colunm_];
     double* AtA = new double[Matrix_A_row_ * Matrix_A_row_];
     double* AtB = new double[Matrix_A_row_];
@@ -359,6 +359,9 @@ int nnls(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Mat
     bool* P = new bool[Matrix_A_row_];
     double* w = new double[Matrix_A_row_];
     double* vector_B_from_MatrixB = new double[Matrix_B_colunm_];
+
+    //showMatrix(Matrix_A,Matrix_A_colunm_,Matrix_A_row_);
+    //showMatrix(vector_B_from_MatrixB,1,Matrix_B_colunm_);
 
     //showMatrix(Matrix_B,Matrix_B_colunm_,Matrix_B_row_);
 
@@ -394,7 +397,7 @@ int nnls(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Mat
 
         while(check_P(P,Matrix_A_row_) && check_w(w,P,Matrix_A_row_,tol))
         {
-            std::cout << "number of true：" << number_of_true << std::endl;
+            //std::cout << "number of true：" << number_of_true << std::endl;
             int k = maxValueIndex(w,P,Matrix_A_row_);
             P[k] = true;
             number_of_true += 1;
@@ -425,7 +428,7 @@ int nnls(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Mat
                 n++;
             }
             //showMatrix(new_Matrix,number_of_true,number_of_true);
-            showMatrix(new_vector,1,number_of_true);
+            //showMatrix(new_vector,1,number_of_true);
 
             indexList.clear();
 
@@ -442,7 +445,7 @@ int nnls(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Mat
 
             while(iter < maxiter && check_s(s,P,Matrix_A_row_))
             {
-                std::cout << "iter：" << iter << std::endl;
+                //std::cout << "iter：" << iter << std::endl;
                 //showMatrix(P,1,Matrix_A_row_);
                 iter += 1;
 
@@ -592,7 +595,7 @@ int nnls(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Mat
     if (w != nullptr)delete[] w;
     if (vector_B_from_MatrixB != nullptr)delete[] vector_B_from_MatrixB;
 
-    std::cout << "end None Negative Least square..." << std::endl;
+    //std::cout << "end None Negative Least square..." << std::endl;
     return 1;
 }
 
