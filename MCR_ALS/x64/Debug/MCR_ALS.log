@@ -13,4 +13,35 @@ C:\CCD_controller_windows_form(Toucan)\OpenBLAS-0.3.27-x64\include\lapacke.h(59,
       C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\complex(1129,7):
       'std::complex<double>' の宣言を確認してください
   
+  linear_algebra.cpp
+C:\CCD_controller_windows_form(Toucan)\OpenBLAS-0.3.27-x64\include\lapacke.h(58,22): warning C4190: 'lapack_make_complex_float' は C リンケージ指定ですが、C と互換性のないユーザー定義の型 'std::complex<float>' を返しています。
+  (ソース ファイル 'MCR-ALS/linear_algebra.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\complex(1038,7):
+      'std::complex<float>' の宣言を確認してください
+  
+C:\CCD_controller_windows_form(Toucan)\OpenBLAS-0.3.27-x64\include\lapacke.h(59,23): warning C4190: 'lapack_make_complex_double' は C リンケージ指定ですが、C と互換性のないユーザー定義の型 'std::complex<double>' を返しています。
+  (ソース ファイル 'MCR-ALS/linear_algebra.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\complex(1129,7):
+      'std::complex<double>' の宣言を確認してください
+  
+C:\CCD_controller_windows_form(Newton)\MCR_ALS\MCR-ALS\linear_algebra.cpp(286,46): warning C4267: '+=': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\CCD_controller_windows_form(Newton)\MCR_ALS\MCR-ALS\linear_algebra.cpp(288,50): warning C4267: '+=': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\CCD_controller_windows_form(Newton)\MCR_ALS\MCR-ALS\linear_algebra.cpp(290,54): warning C4267: '+=': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  utils.cpp
+C:\CCD_controller_windows_form(Newton)\MCR_ALS\MCR-ALS\utils.hpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル 'MCR-ALS/utils.cpp' をコンパイルしています)
+  
+C:\CCD_controller_windows_form(Toucan)\OpenBLAS-0.3.27-x64\include\lapacke.h(58,22): warning C4190: 'lapack_make_complex_float' は C リンケージ指定ですが、C と互換性のないユーザー定義の型 'std::complex<float>' を返しています。
+  (ソース ファイル 'MCR-ALS/utils.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\complex(1038,7):
+      'std::complex<float>' の宣言を確認してください
+  
+C:\CCD_controller_windows_form(Toucan)\OpenBLAS-0.3.27-x64\include\lapacke.h(59,23): warning C4190: 'lapack_make_complex_double' は C リンケージ指定ですが、C と互換性のないユーザー定義の型 'std::complex<double>' を返しています。
+  (ソース ファイル 'MCR-ALS/utils.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\complex(1129,7):
+      'std::complex<double>' の宣言を確認してください
+  
+  コードを生成中...
+  LINK : 前回のインクリメンタル リンクで ..\CCD_controller_windows_form\bin\x64\Debug\MCR_ALS_64.dll が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+     ライブラリ ..\CCD_controller_windows_form\bin\x64\Debug\MCR_ALS_64.lib とオブジェクト ..\CCD_controller_windows_form\bin\x64\Debug\MCR_ALS_64.exp を作成中
   MCR_ALS.vcxproj -> C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\bin\x64\Debug\MCR_ALS_64.dll
