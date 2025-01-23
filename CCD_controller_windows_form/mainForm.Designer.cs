@@ -68,13 +68,12 @@
             this.automaticalShutDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.analizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialFiberAquisitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.identificatePolymorphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnl_Window_Field = new System.Windows.Forms.Panel();
             this.Temperature_timer_for_not_Cooling = new System.Windows.Forms.Timer(this.components);
             this.AutomaticalShutdown_timer = new System.Windows.Forms.Timer(this.components);
-            this.identificatePolymorphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.grpBx_Setting_temp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcUpDwn_Setting_Temperature)).BeginInit();
             this.grpBx_Acquire_Data.SuspendLayout();
@@ -555,6 +554,13 @@
             this.serialFiberAquisitionToolStripMenuItem.Text = "Serial Fiber Aquisition";
             this.serialFiberAquisitionToolStripMenuItem.Click += new System.EventHandler(this.serialFiberAquisitionToolStripMenuItem_Click);
             // 
+            // identificatePolymorphToolStripMenuItem
+            // 
+            this.identificatePolymorphToolStripMenuItem.Enabled = false;
+            this.identificatePolymorphToolStripMenuItem.Name = "identificatePolymorphToolStripMenuItem";
+            this.identificatePolymorphToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
+            this.identificatePolymorphToolStripMenuItem.Text = "identificate polymorph";
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
@@ -583,13 +589,6 @@
             // 
             this.AutomaticalShutdown_timer.Interval = 1000;
             this.AutomaticalShutdown_timer.Tick += new System.EventHandler(this.AutomaticalShutdown_timer_Tick);
-            // 
-            // identificatePolymorphToolStripMenuItem
-            // 
-            this.identificatePolymorphToolStripMenuItem.Enabled = false;
-            this.identificatePolymorphToolStripMenuItem.Name = "identificatePolymorphToolStripMenuItem";
-            this.identificatePolymorphToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
-            this.identificatePolymorphToolStripMenuItem.Text = "identificate polymorph";
             // 
             // mainForm
             // 
@@ -672,7 +671,6 @@
         private System.Windows.Forms.ToolStripMenuItem automaticalShutDownToolStripMenuItem;
         private System.Windows.Forms.Timer AutomaticalShutdown_timer;
         private System.Windows.Forms.ToolStripMenuItem identificatePolymorphToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
