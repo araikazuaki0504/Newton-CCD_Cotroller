@@ -403,3 +403,5 @@ FodyWeavers.xsd
 /opencv/*
 
 /TestDataFiles/*
+
+!/opencv/ここにファイルをおいてね.txt
