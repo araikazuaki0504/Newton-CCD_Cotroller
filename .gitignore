@@ -405,3 +405,5 @@ FodyWeavers.xsd
 /TestDataFiles/*
 
 !/opencv/ここにファイルをおいてね.txt
+!/bin/x64/Debug/ここにファイルをおいてね.txt
+!/bin/x64/Release/ここにファイルをおいてね.txt
