@@ -403,6 +403,6 @@ FodyWeavers.xsd
 
 /TestDataFiles/*
 
-!/opencv/ここにファイルをおいてね.txt
-!/CCD_controller_windows_form/bin/x64/Debug/ここにファイルをおいてね.txt
-!/Release/ここにファイルをおいてね.txt
+!opencv/ここにファイルをおいてね.txt
+![Dd]ebug/ここにファイルをおいてね.txt
+![Rr]elease/ここにファイルをおいてね.txt
