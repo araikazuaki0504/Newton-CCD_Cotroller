@@ -399,11 +399,10 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-!/CCD_controller_windows_form/bin/x64/
 /opencv/*
 
 /TestDataFiles/*
 
 !/opencv/ここにファイルをおいてね.txt
-!/bin/x64/Debug/ここにファイルをおいてね.txt
-!/bin/x64/Release/ここにファイルをおいてね.txt
+!/Debug/ここにファイルをおいてね.txt
+!/Release/ここにファイルをおいてね.txt
