@@ -401,4 +401,5 @@ FodyWeavers.xsd
 
 !/CCD_controller_windows_form/bin/x64/
 /opencv/*
-/.vs/*
+
+/TestDataFiles/*
