@@ -27,8 +27,26 @@ namespace CCD_controller_windows_form
             this._Image_Width = Image_width;
             this._Image_Height = Image_height;
             this._Image = (ushort[])Image.Clone();
+            this.pctrBx_CCD_Image.SizeMode = PictureBoxSizeMode.Zoom;
+            //this.ClientSize = new Size(_Image_Width, _Image_Height);
+            //this.pctrBx_CCD_Image.Size = this.ClientSize;
 
             plotDataBackgroundSubtractCheck();
+            this.MaximumSize = this.Size;
+            this.MinimumSize = this.Size;
+        }
+
+        public Import_Image_Viewer(byte[] Image, int Image_width, int Image_height)
+        {
+            InitializeComponent();
+            this._Image_Width = Image_width;
+            this._Image_Height = Image_height;
+            this.ClientSize = new Size(_Image_Width, _Image_Height);
+            this.pctrBx_CCD_Image.Size = this.ClientSize;
+
+            _bmp = RGBBitmapCreater(Image, _Image_Width, _Image_Height);
+            pctrBx_CCD_Image.Image = _bmp;
+
             this.MaximumSize = this.Size;
             this.MinimumSize = this.Size;
         }
@@ -86,6 +104,18 @@ namespace CCD_controller_windows_form
         private Bitmap CreateBitmapFromBytes(byte[] pixelValues, int width, int height)
         {
             _bmp = new Bitmap(width, height, PixelFormat.Format48bppRgb);
+            Rectangle rect = new Rectangle(0, 0, _bmp.Width, _bmp.Height);
+            BitmapData bitmapData = _bmp.LockBits(rect, ImageLockMode.ReadWrite, _bmp.PixelFormat);
+            IntPtr scan = bitmapData.Scan0;
+            Marshal.Copy(pixelValues, 0, scan, pixelValues.Length);
+            _bmp.UnlockBits(bitmapData);
+
+            return _bmp;
+        }
+
+        private Bitmap RGBBitmapCreater(byte[] pixelValues, int width, int height)
+        {
+            _bmp = new Bitmap(width, height, PixelFormat.Format24bppRgb);
             Rectangle rect = new Rectangle(0, 0, _bmp.Width, _bmp.Height);
             BitmapData bitmapData = _bmp.LockBits(rect, ImageLockMode.ReadWrite, _bmp.PixelFormat);
             IntPtr scan = bitmapData.Scan0;

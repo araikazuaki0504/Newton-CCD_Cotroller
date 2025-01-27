@@ -50,6 +50,24 @@ namespace CCD_controller_windows_form
         [DllImport("MCR_ALS_64.dll", CallingConvention = CallingConvention.StdCall)]
         private unsafe static extern void Test(IntPtr self);
 
+        [DllImport("ConvertData_To_DistributionImage.dll", CallingConvention = CallingConvention.StdCall)]
+        private unsafe static extern IntPtr Create_DataToImage_Instance(double[] Data, uint Image_width, uint Image_height);
+
+        [DllImport("ConvertData_To_DistributionImage.dll", CallingConvention = CallingConvention.StdCall)]
+        private unsafe static extern void changeToImage(IntPtr self);
+
+        [DllImport("ConvertData_To_DistributionImage.dll", CallingConvention = CallingConvention.StdCall)]
+        private unsafe static extern void getImage(IntPtr self, byte* Image);
+
+        [DllImport("ConvertData_To_DistributionImage.dll", CallingConvention = CallingConvention.StdCall)]
+        private unsafe static extern void getImage_Size(IntPtr self, int* Image_width, int* Image_height);
+
+        [DllImport("ConvertData_To_DistributionImage.dll", CallingConvention = CallingConvention.StdCall)]
+        private unsafe static extern void saveImage(IntPtr self, string outputPath);
+
+        [DllImport("ConvertData_To_DistributionImage.dll", CallingConvention = CallingConvention.StdCall)]
+        private unsafe static extern void Delete_DataToImage_Instance(IntPtr self);
+
         [DllImport("kernel32.dll", CallingConvention = CallingConvention.StdCall)]
         private static extern bool SetEnvironmentVariable(string lpName, string lpValue);
 
@@ -116,7 +134,36 @@ namespace CCD_controller_windows_form
             }
         }
 
+        public class DataToImage
+        {
+            private IntPtr _self;
+            public DataToImage(double[] Data, uint Image_width, uint Image_height)
+            {
+                _self = Create_DataToImage_Instance(Data, Image_width, Image_height);
+            }
+            public void Delete()
+            {
+                Delete_DataToImage_Instance(_self);
+            }
+            public DataToImage changeToImage()
+            {
+                import_DLL.changeToImage(_self);
+                return this;
+            }
+            public unsafe void get_Image(byte[] Image)
+            {
+                fixed (byte* _Image = Image) import_DLL.getImage(_self, _Image);
+            }
+            public unsafe void get_ImageSize(ref int Image_width, ref int Image_height)
+            {
+                fixed (int* _Image_width = &Image_width, _Image_height = &Image_height) import_DLL.getImage_Size(_self, _Image_width, _Image_height);
+            }
 
+            public void saveImage(string outputPath)
+            {
+                import_DLL.saveImage(_self, outputPath);
+            }
+        }
     }
 
 }

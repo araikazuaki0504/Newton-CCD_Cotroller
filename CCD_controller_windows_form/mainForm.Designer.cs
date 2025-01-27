@@ -62,6 +62,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importCsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importBackGroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importSubstructImageCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cCDCameraSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ROISettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.triggerModeSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,8 +75,6 @@
             this.pnl_Window_Field = new System.Windows.Forms.Panel();
             this.Temperature_timer_for_not_Cooling = new System.Windows.Forms.Timer(this.components);
             this.AutomaticalShutdown_timer = new System.Windows.Forms.Timer(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.importSubstructImageCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpBx_Setting_temp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcUpDwn_Setting_Temperature)).BeginInit();
             this.grpBx_Acquire_Data.SuspendLayout();
@@ -508,6 +507,13 @@
             this.importBackGroundImageToolStripMenuItem.Text = "import BackGround Image(CSV)";
             this.importBackGroundImageToolStripMenuItem.Click += new System.EventHandler(this.importBackGroundImageToolStripMenuItem_Click);
             // 
+            // importSubstructImageCSVToolStripMenuItem
+            // 
+            this.importSubstructImageCSVToolStripMenuItem.Name = "importSubstructImageCSVToolStripMenuItem";
+            this.importSubstructImageCSVToolStripMenuItem.Size = new System.Drawing.Size(303, 26);
+            this.importSubstructImageCSVToolStripMenuItem.Text = "import Substruct Image(CSV)";
+            this.importSubstructImageCSVToolStripMenuItem.Click += new System.EventHandler(this.importSubstructImageCSVToolStripMenuItem_Click);
+            // 
             // cCDCameraSettingToolStripMenuItem
             // 
             this.cCDCameraSettingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -594,13 +600,6 @@
             this.AutomaticalShutdown_timer.Interval = 1000;
             this.AutomaticalShutdown_timer.Tick += new System.EventHandler(this.AutomaticalShutdown_timer_Tick);
             // 
-            // importSubstructImageCSVToolStripMenuItem
-            // 
-            this.importSubstructImageCSVToolStripMenuItem.Name = "importSubstructImageCSVToolStripMenuItem";
-            this.importSubstructImageCSVToolStripMenuItem.Size = new System.Drawing.Size(303, 26);
-            this.importSubstructImageCSVToolStripMenuItem.Text = "import Substruct Image(CSV)";
-            this.importSubstructImageCSVToolStripMenuItem.Click += new System.EventHandler(this.importSubstructImageCSVToolStripMenuItem_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -681,7 +680,6 @@
         private System.Windows.Forms.ToolStripMenuItem automaticalShutDownToolStripMenuItem;
         private System.Windows.Forms.Timer AutomaticalShutdown_timer;
         private System.Windows.Forms.ToolStripMenuItem identificatePolymorphToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ToolStripMenuItem importSubstructImageCSVToolStripMenuItem;
     }
 }

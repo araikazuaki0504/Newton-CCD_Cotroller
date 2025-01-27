@@ -248,6 +248,7 @@ MCR_ALS& MCR_ALS::fit(double* D, int D_colunm, int D_row, int n_component, doubl
             if (error_diff < abs(tol_err_change))
             {
                 std::cout << "Change in err below tol_err_change(" << std::scientific << std::setprecision(5) << error_diff << ")" << std::endl;
+                std::cout << "Residue = " << std::scientific << std::setprecision(5) << errs.end()[-1] << std::endl;
                 break;
             }
         }

@@ -34,9 +34,11 @@ namespace CCD_controller_windows_form
             // 
             // SeveralSpectrumForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 679);
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ClientSize = new System.Drawing.Size(725, 566);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SeveralSpectrumForm";
             this.Text = "SeveralSpectrumForm";
             this.ResumeLayout(false);

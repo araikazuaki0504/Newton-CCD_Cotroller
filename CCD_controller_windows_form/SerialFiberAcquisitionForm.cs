@@ -90,6 +90,11 @@ namespace CCD_controller_windows_form
             _BackGroundData = (float[])BackGround_Image.Clone();
         }
 
+        public int get_Fiber_qty()
+        {
+            return _Fiber_qty;
+        }
+
         private void DrawLine_To_CCDImage(float[] Separete_Point)
         {
             _tmp_bmp = (Bitmap)_bmp.Clone();

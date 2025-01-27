@@ -12,6 +12,7 @@ using ReadMode = ATMCD64CS.AndorSDK.ReadMode;
 using AcquisitionMode = ATMCD64CS.AndorSDK.AcquisitionMode;
 using System.Runtime.InteropServices;
 using System.Data;
+using System.Windows;
 
 namespace CCD_controller_windows_form
 {
@@ -37,6 +38,8 @@ namespace CCD_controller_windows_form
         private int nAD;
         private int iSpeed;
         private int index;
+        private int n_component = 5;
+        private int Fiber_qty;
         private uint CCD_Data_Size;
 
         private bool errorFlag;
@@ -51,10 +54,12 @@ namespace CCD_controller_windows_form
 
         private ushort[] CCD_Data;
         private ushort[] background_CCD_Data;
-        private float [] CSV_CCD_Data;
+        private float[] CSV_CCD_Data;
         private float[,] Several_Spectrum_Datum;
         private double[] Sequential_number_ZeroToXpixcel;
         private double[] Spectrum;
+        private double[] fitting_C;
+        private double[] fitting_St;
 
         private SerialFiberAcquisitionForm serialFiberAquisitionForm;
         private DisplayGraphForm camera_datagraphform;
@@ -62,6 +67,7 @@ namespace CCD_controller_windows_form
         private ImageForm camera_imageform;
         private TriggerModeSettingForm triggerModeSettingForm;
         private SeveralSpectrumForm SeveralSpectrumForm;
+        private MCRSettingcs MCRSettingcs;
 
         public mainForm()
         {
@@ -110,11 +116,11 @@ namespace CCD_controller_windows_form
                     CCD_Cooling();
                     break;
 
-                //case DialogResult.Cancel:
-                //    this.Close();
-                //    return;
+                    //case DialogResult.Cancel:
+                    //    this.Close();
+                    //    return;
             }
-            
+
         }
 
         /// <summary>
@@ -253,7 +259,7 @@ namespace CCD_controller_windows_form
         /// </summary>
         private bool Initial_Acquisition_Configuration()
         {
-            if(camera_imageform != null)
+            if (camera_imageform != null)
             {
                 xpixcel = camera_imageform.get_ROI_XSize();
                 ypixcel = camera_imageform.get_ROI_YSize();
@@ -298,7 +304,7 @@ namespace CCD_controller_windows_form
                 if (Sequential_number_ZeroToXpixcel != null) Array.Clear(Sequential_number_ZeroToXpixcel, 0, Sequential_number_ZeroToXpixcel.Length);
                 Sequential_number_ZeroToXpixcel = new double[CCD_Data_Size];
 
-                for(int i = 0; i < xpixcel; i++)Sequential_number_ZeroToXpixcel[i] = i;
+                for (int i = 0; i < xpixcel; i++) Sequential_number_ZeroToXpixcel[i] = i;
             }
 
             return true;
@@ -407,7 +413,7 @@ namespace CCD_controller_windows_form
             bttn_Stop.Enabled = true;
 
             AndorSDK.GetStatus(ref Status);
-            if(Status != AndorSDK.DRV_IDLE)
+            if (Status != AndorSDK.DRV_IDLE)
             {
                 Temperature_timer.Enabled = true;
                 Temperature_timer.Start();
@@ -443,7 +449,7 @@ namespace CCD_controller_windows_form
                 else
                 {
                     errorValue = AndorSDK.GetAcquisitionTimings(ref exposure_tim, ref accumulat_time, ref kinetic_time);
-                    if(errorValue != AndorSDK.DRV_SUCCESS)
+                    if (errorValue != AndorSDK.DRV_SUCCESS)
                     {
                         MessageBox.Show("AcqusitionTimingを取得できませんでした。", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         Temperature_timer.Enabled = true;
@@ -470,14 +476,14 @@ namespace CCD_controller_windows_form
                             return;
                         }
 
-                            try
-                            {
-                                await Task.Delay(Convert.ToInt32(TimeOut), exposure_tokenSource.Token);
-                            }
-                            catch
-                            {
+                        try
+                        {
+                            await Task.Delay(Convert.ToInt32(TimeOut), exposure_tokenSource.Token);
+                        }
+                        catch
+                        {
 
-                            }
+                        }
 
                         errorValue = AndorSDK.GetAcquiredData16(CCD_Data, CCD_Data_Size);
                         if (errorValue != AndorSDK.DRV_SUCCESS)
@@ -549,7 +555,7 @@ namespace CCD_controller_windows_form
         }
 
         private void bttn_Stop_Click(object sender, EventArgs e)
-        {   
+        {
             exposure_tokenSource.CancelAfter(200);
         }
 
@@ -616,22 +622,26 @@ namespace CCD_controller_windows_form
                 serialFiberAquisitionForm = new SerialFiberAcquisitionForm(CSV_CCD_Data, xpixcel, ypixcel);
                 serialFiberAquisitionForm.TopLevel = false;
                 this.pnl_Window_Field.Controls.Add(serialFiberAquisitionForm);
+                serialFiberAquisitionForm.BringToFront();
                 serialFiberAquisitionForm.Show();
 
                 serialFiberAquisitionForm.calculate_separetePoint();
                 identificatePolymorphToolStripMenuItem.Enabled = true;
+                Fiber_qty = serialFiberAquisitionForm.get_Fiber_qty();
             }
             else if ((CCD_Data.Max<ushort>() != 0 || CCD_Data.Min<ushort>() != 0) && serialFiberAquisitionForm == null)
             {
                 serialFiberAquisitionForm = new SerialFiberAcquisitionForm(CCD_Data, xpixcel, ypixcel);
                 serialFiberAquisitionForm.TopLevel = false;
                 this.pnl_Window_Field.Controls.Add(serialFiberAquisitionForm);
+                serialFiberAquisitionForm.BringToFront();
                 serialFiberAquisitionForm.Show();
                 serialFiberAquisitionForm.BringToFront();
                 if (background_CCD_Data != null) serialFiberAquisitionForm.set_BackGround_Image_for_ushort(background_CCD_Data);
 
                 serialFiberAquisitionForm.calculate_separetePoint();
                 identificatePolymorphToolStripMenuItem.Enabled = true;
+                Fiber_qty = serialFiberAquisitionForm.get_Fiber_qty();
             }
             else if ((CCD_Data.Max<ushort>() != 0 || CCD_Data.Min<ushort>() != 0) && serialFiberAquisitionForm != null)
             {
@@ -639,6 +649,7 @@ namespace CCD_controller_windows_form
 
                 serialFiberAquisitionForm.calculate_separetePoint();
                 identificatePolymorphToolStripMenuItem.Enabled = true;
+                Fiber_qty = serialFiberAquisitionForm.get_Fiber_qty();
             }
         }
 
@@ -685,6 +696,7 @@ namespace CCD_controller_windows_form
                 Import_Image_Viewer import_Image = new Import_Image_Viewer(CCD_Data, row_index, col_index);
                 import_Image.TopLevel = false;
                 this.pnl_Window_Field.Controls.Add(import_Image);
+                import_Image.BringToFront();
                 import_Image.Show();
                 import_Image.BringToFront();
 
@@ -710,6 +722,7 @@ namespace CCD_controller_windows_form
                 Import_Image_Viewer import_Image = new Import_Image_Viewer(CCD_Data, col_index, row_index);
                 import_Image.TopLevel = false;
                 this.pnl_Window_Field.Controls.Add(import_Image);
+                import_Image.BringToFront();
                 import_Image.Show();
                 import_Image.BringToFront();
 
@@ -758,6 +771,7 @@ namespace CCD_controller_windows_form
                 Import_Image_Viewer import_Image = new Import_Image_Viewer(background_CCD_Data, row_index, col_index);
                 import_Image.TopLevel = false;
                 this.pnl_Window_Field.Controls.Add(import_Image);
+                import_Image.BringToFront();
                 import_Image.Show();
                 import_Image.BringToFront();
 
@@ -779,6 +793,7 @@ namespace CCD_controller_windows_form
                 Import_Image_Viewer import_Image = new Import_Image_Viewer(background_CCD_Data, row_index, col_index);
                 import_Image.TopLevel = false;
                 this.pnl_Window_Field.Controls.Add(import_Image);
+                import_Image.BringToFront();
                 import_Image.Show();
                 import_Image.BringToFront();
 
@@ -805,7 +820,7 @@ namespace CCD_controller_windows_form
 
         private void chckBx_set_as_BackGround_CheckedChanged(object sender, EventArgs e)
         {
-            if(chckBx_set_as_BackGround.Checked)
+            if (chckBx_set_as_BackGround.Checked)
             {
                 chckBx_continuous.Checked = false;
             }
@@ -813,7 +828,7 @@ namespace CCD_controller_windows_form
 
         private void chckBx_continuous_CheckedChanged(object sender, EventArgs e)
         {
-            if(chckBx_continuous.Checked)
+            if (chckBx_continuous.Checked)
             {
                 chckBx_set_as_BackGround.Checked = false;
             }
@@ -859,7 +874,7 @@ namespace CCD_controller_windows_form
 
         private void automaticalShutDownToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(now_AutomaticallyShutdown)
+            if (now_AutomaticallyShutdown)
             {
                 AutomaticalShutdown_timer.Stop();
                 AutomaticalShutdown_timer.Enabled = false;
@@ -933,6 +948,7 @@ namespace CCD_controller_windows_form
                 Import_Image_Viewer import_Image = new Import_Image_Viewer(CCD_Data, row_index, col_index);
                 import_Image.TopLevel = false;
                 this.pnl_Window_Field.Controls.Add(import_Image);
+                import_Image.BringToFront();
                 import_Image.Show();
                 import_Image.BringToFront();
 
@@ -960,6 +976,7 @@ namespace CCD_controller_windows_form
                 Import_Image_Viewer import_Image = new Import_Image_Viewer(CCD_Data, col_index, row_index);
                 import_Image.TopLevel = false;
                 this.pnl_Window_Field.Controls.Add(import_Image);
+                import_Image.BringToFront();
                 import_Image.Show();
                 import_Image.BringToFront();
 
@@ -967,19 +984,99 @@ namespace CCD_controller_windows_form
             }
         }
 
-        private async void identificatePolymorphToolStripMenuItem_Click(object sender, EventArgs e)
+        private void identificatePolymorphToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MCRSettingcs = new MCRSettingcs();
+            MCRSettingcs.TopLevel = false;
+            MCRSettingcs.Calculate += calcurate;
+            this.pnl_Window_Field.Controls.Add(MCRSettingcs);
+            MCRSettingcs.BringToFront();
+            MCRSettingcs.Show();
+        }
+
+        private void SeveralSpectrumForm_Button_Clicked(object sender, EventArgs e)
+        {
+            double[] Polymorph_Ratio = new double[Fiber_qty];
+            int[] Selected_Spectrum_index = SeveralSpectrumForm.Get_Selected_Spectrum();
+            int Picture_Width = 0;
+            int Picture_Height = 0;
+
+            for (int i = 0; i < Fiber_qty; i++)
+            {
+                double tmp = 0;
+
+                foreach (int index in Selected_Spectrum_index)
+                {
+                    tmp += fitting_St[i * n_component + index];
+                }
+
+                Polymorph_Ratio[i] = fitting_St[i * n_component + Selected_Spectrum_index[0]] / tmp;
+            }
+
+            import_DLL.DataToImage dataToImage = new import_DLL.DataToImage(Polymorph_Ratio, 500, 500);
+
+            dataToImage.changeToImage();
+            dataToImage.get_ImageSize(ref Picture_Width, ref Picture_Height);
+
+            byte[] distribution = new byte[Picture_Width * Picture_Height * 3];
+
+            dataToImage.get_Image(distribution);
+
+            dataToImage.Delete();
+
+            Import_Image_Viewer distributionImage = new Import_Image_Viewer(distribution, 500, 500);
+            distributionImage.TopLevel = false;
+            this.pnl_Window_Field.Controls.Add(distributionImage);
+            distributionImage.BringToFront();
+            distributionImage.Show();
+
+        }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            double[] Polymorph_Ratio = new double[37];
+            int Picture_Width = 0;
+            int Picture_Height = 0;
+
+
+            Random rand = new Random();
+
+            for (int i = 0; i < 37; i++)
+            {
+                Polymorph_Ratio[i] = rand.NextDouble();
+            }
+
+            import_DLL.DataToImage dataToImage = new import_DLL.DataToImage(Polymorph_Ratio, 500, 500);
+
+            dataToImage.changeToImage();
+            dataToImage.get_ImageSize(ref Picture_Width, ref Picture_Height);
+
+            byte[] distribution = new byte[Picture_Width * Picture_Height * 3];
+
+            dataToImage.get_Image(distribution);
+
+            dataToImage.Delete();
+
+            Import_Image_Viewer distributionImage = new Import_Image_Viewer(distribution, 500, 500);
+            distributionImage.TopLevel = false;
+            this.pnl_Window_Field.Controls.Add(distributionImage);
+            distributionImage.BringToFront();
+            distributionImage.Show();
+        }
+
+        private async void calcurate(object sender, EventArgs e)
         {
             var sw = new System.Diagnostics.Stopwatch();
             Several_Spectrum_Datum = serialFiberAquisitionForm.Get_Several_Spectrum_Datum();
+            n_component = MCRSettingcs.get_component_number();
 
-            int n_component = 3;
             double[] St = new double[n_component * xpixcel];
-            double[] fitting_C = new double[37 * n_component];
-            double[] fitting_St = new double[n_component * xpixcel];
+            fitting_C = new double[Fiber_qty * n_component];
+            fitting_St = new double[n_component * xpixcel];
 
             Random random = new Random();
 
-            for(int i = 0; i < n_component * xpixcel; i++)
+            for (int i = 0; i < n_component * xpixcel; i++)
             {
                 St[i] = random.NextDouble();
             }
@@ -989,25 +1086,18 @@ namespace CCD_controller_windows_form
             import_DLL.MCR_ALS mcr = new import_DLL.MCR_ALS(100000);
 
             sw.Start();
-            await Task.Run(() => mcr.fit(D, 37, xpixcel, n_component, null, St));
+            await Task.Run(() => mcr.fit(D, Fiber_qty, xpixcel, n_component, null, St));
             sw.Stop();
 
-            mcr.get_C(fitting_C, 37, n_component);
+            mcr.get_C(fitting_C, Fiber_qty, n_component);
             mcr.get_St(fitting_St, n_component, xpixcel);
 
             mcr.Delete();
 
-            SeveralSpectrumForm = new SeveralSpectrumForm(fitting_St, n_component,xpixcel);
+            SeveralSpectrumForm = new SeveralSpectrumForm(fitting_St, n_component, xpixcel);
             SeveralSpectrumForm.Text = $"Pure Spectrum ({sw.ElapsedMilliseconds} ms)";
+            SeveralSpectrumForm._Is_Button_Clicked += SeveralSpectrumForm_Button_Clicked;
             SeveralSpectrumForm.Show();
-            
-            //Console.WriteLine("■処理Aにかかった時間");
-            //TimeSpan ts = sw.Elapsed;
-            //Console.WriteLine($"　{ts}");
-            //Console.WriteLine($"　{ts.Hours}時間 {ts.Minutes}分 {ts.Seconds}秒 {ts.Milliseconds}ミリ秒");
-            //Console.WriteLine($"　{sw.ElapsedMilliseconds}ミリ秒");
-
-
         }
     }
 }

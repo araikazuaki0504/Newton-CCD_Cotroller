@@ -37,23 +37,25 @@
             this.pctrBx_CCD_Image.Location = new System.Drawing.Point(0, 0);
             this.pctrBx_CCD_Image.Margin = new System.Windows.Forms.Padding(0);
             this.pctrBx_CCD_Image.Name = "pctrBx_CCD_Image";
-            this.pctrBx_CCD_Image.Size = new System.Drawing.Size(512, 132);
-            this.pctrBx_CCD_Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pctrBx_CCD_Image.Size = new System.Drawing.Size(410, 110);
+            this.pctrBx_CCD_Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pctrBx_CCD_Image.TabIndex = 0;
             this.pctrBx_CCD_Image.TabStop = false;
             this.pctrBx_CCD_Image.Click += new System.EventHandler(this.pctrBx_CCD_Image_Click);
             // 
             // Import_Image_Viewer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
-            this.ClientSize = new System.Drawing.Size(513, 134);
+            this.ClientSize = new System.Drawing.Size(410, 112);
             this.Controls.Add(this.pctrBx_CCD_Image);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Import_Image_Viewer";
             this.Text = "Import_Image_Viewer";
             ((System.ComponentModel.ISupportInitialize)(this.pctrBx_CCD_Image)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
