@@ -1,2 +1,0 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8004: Output ディレクトリの末尾がスラッシュではありません。Output ディレクトリが適切に評価されるようにするために、このビルド インスタンスによってスラッシュが追加されます。
-  MCR_ALS.vcxproj -> C:\CCD_controller_windows_form(Newton)\CCD_controller_windows_form\bin\x64\Release\MCR_ALS_64.dll
