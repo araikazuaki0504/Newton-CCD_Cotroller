@@ -26,13 +26,11 @@ namespace CCD_controller_windows_form
         private int _end_point = 373;
         private float[] _Horizon_Bining_Image_Data;
         private float[] _Linspace_forX_Axis;
-        private int _Calibration = 0;
         private Bitmap _bmp;
         private Bitmap _tmp_bmp;
         private Graphics _objGrp;
         private Pen _objPen;
         private CCDImage_View_Form _CCDImage_View_form;
-        private SeveralSpectrumForm _SeveralSpectrumform;
 
 
         public SerialFiberAcquisitionForm(float[] Image, int Image_Width, int Image_Height)
@@ -95,6 +93,11 @@ namespace CCD_controller_windows_form
             return _Fiber_qty;
         }
 
+        public void Clear()
+        {
+            if(this.chrt_Seek_Peak_Graph != null) this.chrt_Seek_Peak_Graph.Series["SeparetePoint"].Dispose();
+        }
+
         private void DrawLine_To_CCDImage(float[] Separete_Point)
         {
             _tmp_bmp = (Bitmap)_bmp.Clone();
@@ -112,14 +115,7 @@ namespace CCD_controller_windows_form
 
         private void PlotData(string name)
         {
-            try
-            {
-                chrt_Seek_Peak_Graph.Series[name].Points.Clear();
-            }
-            catch
-            {
-
-            }
+            chrt_Seek_Peak_Graph.Series[name].Points.Clear();
 
             for (int i = 0; i < _Image_Height; i++)
             {
@@ -429,7 +425,6 @@ namespace CCD_controller_windows_form
         private void bttn_Close_Click(object sender, EventArgs e)
         {
             if(_CCDImage_View_form != null)_CCDImage_View_form.Close();
-            _SeveralSpectrumform.Close();
             this.Close();
         }
 

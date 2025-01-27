@@ -629,6 +629,14 @@ namespace CCD_controller_windows_form
                 identificatePolymorphToolStripMenuItem.Enabled = true;
                 Fiber_qty = serialFiberAquisitionForm.get_Fiber_qty();
             }
+            else if((CSV_CCD_Data.Max<float>() != 0 || CSV_CCD_Data.Min<float>() != 0) && serialFiberAquisitionForm != null)
+            {
+                serialFiberAquisitionForm.Clear();
+                serialFiberAquisitionForm.calculate_separetePoint();
+                identificatePolymorphToolStripMenuItem.Enabled = true;
+                Fiber_qty = serialFiberAquisitionForm.get_Fiber_qty();
+                serialFiberAquisitionForm.Show();
+            }
             else if ((CCD_Data.Max<ushort>() != 0 || CCD_Data.Min<ushort>() != 0) && serialFiberAquisitionForm == null)
             {
                 serialFiberAquisitionForm = new SerialFiberAcquisitionForm(CCD_Data, xpixcel, ypixcel);
@@ -647,9 +655,11 @@ namespace CCD_controller_windows_form
             {
                 if (background_CCD_Data != null) serialFiberAquisitionForm.set_BackGround_Image_for_ushort(background_CCD_Data);
 
+                serialFiberAquisitionForm.Clear();
                 serialFiberAquisitionForm.calculate_separetePoint();
                 identificatePolymorphToolStripMenuItem.Enabled = true;
                 Fiber_qty = serialFiberAquisitionForm.get_Fiber_qty();
+                serialFiberAquisitionForm.Show();
             }
         }
 
