@@ -1,1 +1,4 @@
-opencvのbuildフォルダ以下をおいてね
+libopenblas.dll
+opencv_world4100.dll
+
+上記のdllファイルをおいてね
