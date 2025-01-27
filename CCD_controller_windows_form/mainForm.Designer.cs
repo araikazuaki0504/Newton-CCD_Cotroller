@@ -74,6 +74,8 @@
             this.pnl_Window_Field = new System.Windows.Forms.Panel();
             this.Temperature_timer_for_not_Cooling = new System.Windows.Forms.Timer(this.components);
             this.AutomaticalShutdown_timer = new System.Windows.Forms.Timer(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.importSubstructImageCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpBx_Setting_temp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcUpDwn_Setting_Temperature)).BeginInit();
             this.grpBx_Acquire_Data.SuspendLayout();
@@ -486,7 +488,8 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importCsvToolStripMenuItem,
-            this.importBackGroundImageToolStripMenuItem});
+            this.importBackGroundImageToolStripMenuItem,
+            this.importSubstructImageCSVToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
@@ -560,6 +563,7 @@
             this.identificatePolymorphToolStripMenuItem.Name = "identificatePolymorphToolStripMenuItem";
             this.identificatePolymorphToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
             this.identificatePolymorphToolStripMenuItem.Text = "identificate polymorph";
+            this.identificatePolymorphToolStripMenuItem.Click += new System.EventHandler(this.identificatePolymorphToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -590,6 +594,13 @@
             this.AutomaticalShutdown_timer.Interval = 1000;
             this.AutomaticalShutdown_timer.Tick += new System.EventHandler(this.AutomaticalShutdown_timer_Tick);
             // 
+            // importSubstructImageCSVToolStripMenuItem
+            // 
+            this.importSubstructImageCSVToolStripMenuItem.Name = "importSubstructImageCSVToolStripMenuItem";
+            this.importSubstructImageCSVToolStripMenuItem.Size = new System.Drawing.Size(303, 26);
+            this.importSubstructImageCSVToolStripMenuItem.Text = "import Substruct Image(CSV)";
+            this.importSubstructImageCSVToolStripMenuItem.Click += new System.EventHandler(this.importSubstructImageCSVToolStripMenuItem_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -605,7 +616,6 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "mainForm";
             this.Text = "CCD_Controller";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
             this.grpBx_Setting_temp.ResumeLayout(false);
             this.grpBx_Setting_temp.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcUpDwn_Setting_Temperature)).EndInit();
@@ -671,6 +681,8 @@
         private System.Windows.Forms.ToolStripMenuItem automaticalShutDownToolStripMenuItem;
         private System.Windows.Forms.Timer AutomaticalShutdown_timer;
         private System.Windows.Forms.ToolStripMenuItem identificatePolymorphToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStripMenuItem importSubstructImageCSVToolStripMenuItem;
     }
 }
 

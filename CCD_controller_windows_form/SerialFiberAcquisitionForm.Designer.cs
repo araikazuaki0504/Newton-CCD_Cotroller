@@ -44,9 +44,10 @@
             // 
             // pctrBx_CCD_Image
             // 
-            this.pctrBx_CCD_Image.Location = new System.Drawing.Point(12, 12);
+            this.pctrBx_CCD_Image.Location = new System.Drawing.Point(10, 10);
+            this.pctrBx_CCD_Image.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pctrBx_CCD_Image.Name = "pctrBx_CCD_Image";
-            this.pctrBx_CCD_Image.Size = new System.Drawing.Size(776, 174);
+            this.pctrBx_CCD_Image.Size = new System.Drawing.Size(621, 145);
             this.pctrBx_CCD_Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pctrBx_CCD_Image.TabIndex = 0;
             this.pctrBx_CCD_Image.TabStop = false;
@@ -59,22 +60,24 @@
             legend1.Name = "Legend1";
             legend1.Position.Auto = false;
             this.chrt_Seek_Peak_Graph.Legends.Add(legend1);
-            this.chrt_Seek_Peak_Graph.Location = new System.Drawing.Point(12, 192);
+            this.chrt_Seek_Peak_Graph.Location = new System.Drawing.Point(10, 160);
+            this.chrt_Seek_Peak_Graph.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chrt_Seek_Peak_Graph.Name = "chrt_Seek_Peak_Graph";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "Spectrum";
             this.chrt_Seek_Peak_Graph.Series.Add(series1);
-            this.chrt_Seek_Peak_Graph.Size = new System.Drawing.Size(422, 391);
+            this.chrt_Seek_Peak_Graph.Size = new System.Drawing.Size(338, 326);
             this.chrt_Seek_Peak_Graph.TabIndex = 0;
             this.chrt_Seek_Peak_Graph.Text = "spectrum";
             // 
             // bttn_Find_Fiber_Line
             // 
-            this.bttn_Find_Fiber_Line.Location = new System.Drawing.Point(626, 465);
+            this.bttn_Find_Fiber_Line.Location = new System.Drawing.Point(501, 388);
+            this.bttn_Find_Fiber_Line.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.bttn_Find_Fiber_Line.Name = "bttn_Find_Fiber_Line";
-            this.bttn_Find_Fiber_Line.Size = new System.Drawing.Size(162, 48);
+            this.bttn_Find_Fiber_Line.Size = new System.Drawing.Size(130, 40);
             this.bttn_Find_Fiber_Line.TabIndex = 1;
             this.bttn_Find_Fiber_Line.Text = "Find Fiber Line";
             this.bttn_Find_Fiber_Line.UseVisualStyleBackColor = true;
@@ -82,9 +85,10 @@
             // 
             // bttn_Close
             // 
-            this.bttn_Close.Location = new System.Drawing.Point(626, 535);
+            this.bttn_Close.Location = new System.Drawing.Point(501, 446);
+            this.bttn_Close.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.bttn_Close.Name = "bttn_Close";
-            this.bttn_Close.Size = new System.Drawing.Size(162, 48);
+            this.bttn_Close.Size = new System.Drawing.Size(130, 40);
             this.bttn_Close.TabIndex = 2;
             this.bttn_Close.Text = "Close";
             this.bttn_Close.UseVisualStyleBackColor = true;
@@ -92,12 +96,13 @@
             // 
             // nmrcUpDwn_Fiber_qty
             // 
-            this.nmrcUpDwn_Fiber_qty.Location = new System.Drawing.Point(668, 413);
+            this.nmrcUpDwn_Fiber_qty.Location = new System.Drawing.Point(534, 344);
+            this.nmrcUpDwn_Fiber_qty.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nmrcUpDwn_Fiber_qty.Name = "nmrcUpDwn_Fiber_qty";
-            this.nmrcUpDwn_Fiber_qty.Size = new System.Drawing.Size(120, 25);
+            this.nmrcUpDwn_Fiber_qty.Size = new System.Drawing.Size(96, 22);
             this.nmrcUpDwn_Fiber_qty.TabIndex = 3;
             this.nmrcUpDwn_Fiber_qty.Value = new decimal(new int[] {
-            7,
+            37,
             0,
             0,
             0});
@@ -106,24 +111,26 @@
             // lbl_fiber_qty
             // 
             this.lbl_fiber_qty.AutoSize = true;
-            this.lbl_fiber_qty.Location = new System.Drawing.Point(506, 413);
+            this.lbl_fiber_qty.Location = new System.Drawing.Point(405, 344);
+            this.lbl_fiber_qty.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_fiber_qty.Name = "lbl_fiber_qty";
-            this.lbl_fiber_qty.Size = new System.Drawing.Size(131, 18);
+            this.lbl_fiber_qty.Size = new System.Drawing.Size(114, 15);
             this.lbl_fiber_qty.TabIndex = 4;
             this.lbl_fiber_qty.Text = "Number of fibers";
             // 
-            // SerialFiberAquisitionForm
+            // SerialFiberAcquisitionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 595);
+            this.ClientSize = new System.Drawing.Size(640, 496);
             this.Controls.Add(this.lbl_fiber_qty);
             this.Controls.Add(this.nmrcUpDwn_Fiber_qty);
             this.Controls.Add(this.bttn_Close);
             this.Controls.Add(this.bttn_Find_Fiber_Line);
             this.Controls.Add(this.chrt_Seek_Peak_Graph);
             this.Controls.Add(this.pctrBx_CCD_Image);
-            this.Name = "SerialFiberAquisitionForm";
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "SerialFiberAcquisitionForm";
             this.Text = "SerialFiberAquisition";
             ((System.ComponentModel.ISupportInitialize)(this.pctrBx_CCD_Image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chrt_Seek_Peak_Graph)).EndInit();

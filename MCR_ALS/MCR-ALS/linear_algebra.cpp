@@ -1436,7 +1436,7 @@ double* inverse(double* Matrix, int Matrix_colunm_, int Matrix_row_, double* inv
 //まだRank落ちの正方行列にしか対応していない
 double* Pseudo_inverse(double* Matrix, int Matrix_colunm_, int Matrix_row_, double* pinv_Matrix)
 {
-    showMatrix(Matrix,Matrix_colunm_,Matrix_row_);
+    //showMatrix(Matrix,Matrix_colunm_,Matrix_row_);
 
     int eig_size = (Matrix_colunm_ > Matrix_row_ ? Matrix_row_ : Matrix_colunm_);
 
@@ -1888,7 +1888,7 @@ void SVD_float(float* Matrix, int Matrix_colunm, int Matrix_row, float* U, float
 
 void SVD_double(double* Matrix, int Matrix_colunm, int Matrix_row, double* U, double* S, double* V)
 {
-    std::cout << "start SVD..." << std::endl;
+    //std::cout << "start SVD..." << std::endl;
 
     double* tmp_Matrix = new double[Matrix_colunm * Matrix_row];
     double* tmp_S = new double[Matrix_colunm * Matrix_row];
@@ -2590,7 +2590,7 @@ void SVD_double(double* Matrix, int Matrix_colunm, int Matrix_row, double* U, do
     //delete[] v_vector;
     //delete[] isExist;
 
-    std::cout << "SVD end..." << std::endl;
+    //std::cout << "SVD end..." << std::endl;
 }
 
 void svd_with_tridiag(double* Matrix, int Matrix_colunm, int Matrix_row, double* U, double* S, double* V)

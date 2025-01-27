@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using MessageBox = System.Windows.Forms.MessageBox;
 using ReadMode = ATMCD64CS.AndorSDK.ReadMode;
 using AcquisitionMode = ATMCD64CS.AndorSDK.AcquisitionMode;
+using System.Runtime.InteropServices;
+using System.Data;
 
 namespace CCD_controller_windows_form
 {
@@ -49,6 +51,8 @@ namespace CCD_controller_windows_form
 
         private ushort[] CCD_Data;
         private ushort[] background_CCD_Data;
+        private float [] CSV_CCD_Data;
+        private float[,] Several_Spectrum_Datum;
         private double[] Sequential_number_ZeroToXpixcel;
         private double[] Spectrum;
 
@@ -57,6 +61,7 @@ namespace CCD_controller_windows_form
         private Import_Image_Viewer CCDImage_viewer;
         private ImageForm camera_imageform;
         private TriggerModeSettingForm triggerModeSettingForm;
+        private SeveralSpectrumForm SeveralSpectrumForm;
 
         public mainForm()
         {
@@ -392,6 +397,9 @@ namespace CCD_controller_windows_form
         {
             int Status = 0;
             int frame_num = 0;
+            float exposure_tim = 0;
+            float accumulat_time = 0;
+            float kinetic_time = 0;
 
             Temperature_timer.Stop();
             Temperature_timer.Enabled = false;
@@ -434,12 +442,10 @@ namespace CCD_controller_windows_form
                 }
                 else
                 {
-                    float read_out_time = 0;
-
-                    errorValue = AndorSDK.GetReadOutTime(ref read_out_time);
-                    if (errorValue != AndorSDK.DRV_SUCCESS)
+                    errorValue = AndorSDK.GetAcquisitionTimings(ref exposure_tim, ref accumulat_time, ref kinetic_time);
+                    if(errorValue != AndorSDK.DRV_SUCCESS)
                     {
-                        MessageBox.Show("読み出し時間を取得できませんでした。", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("AcqusitionTimingを取得できませんでした。", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         Temperature_timer.Enabled = true;
                         Temperature_timer.Start();
                         bttn_Acquire_Frame.Enabled = true;
@@ -447,6 +453,8 @@ namespace CCD_controller_windows_form
 
                         return;
                     }
+
+                    float TimeOut = exposure_tim + accumulat_time + kinetic_time;
 
                     while ((nmrcUpDwn_Number_of_Frame.Value > frame_num || chckBx_continuous.Checked) && !exposure_tokenSource.IsCancellationRequested)
                     {
@@ -462,14 +470,14 @@ namespace CCD_controller_windows_form
                             return;
                         }
 
-                        try
-                        {
-                            await Task.Delay(Convert.ToInt32(read_out_time), exposure_tokenSource.Token);
-                        }
-                        catch
-                        {
+                            try
+                            {
+                                await Task.Delay(Convert.ToInt32(TimeOut), exposure_tokenSource.Token);
+                            }
+                            catch
+                            {
 
-                        }
+                            }
 
                         errorValue = AndorSDK.GetAcquiredData16(CCD_Data, CCD_Data_Size);
                         if (errorValue != AndorSDK.DRV_SUCCESS)
@@ -540,12 +548,6 @@ namespace CCD_controller_windows_form
             ROISettingToolStripMenuItem.Enabled = true;
         }
 
-        private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            errorValue = AndorSDK.SetReadMode(ReadMode.Image);
-            if (errorValue != AndorSDK.DRV_SUCCESS) MessageBox.Show("ReadModeをImageに変更できませんでした。", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
         private void bttn_Stop_Click(object sender, EventArgs e)
         {   
             exposure_tokenSource.CancelAfter(200);
@@ -557,7 +559,6 @@ namespace CCD_controller_windows_form
             {
                 //chckBx_continuous.Enabled = false;
                 serialFiberAquisitionToolStripMenuItem.Enabled = true;
-                identificatePolymorphToolStripMenuItem.Enabled = true;
                 chckBx_set_as_BackGround.Checked = false;
                 chckBx_set_as_BackGround.Enabled = true;
             }
@@ -565,7 +566,6 @@ namespace CCD_controller_windows_form
             {
                 //chckBx_continuous.Enabled = true;
                 serialFiberAquisitionToolStripMenuItem.Enabled = false;
-                identificatePolymorphToolStripMenuItem.Enabled= false;
                 chckBx_set_as_BackGround.Checked = false;
                 chckBx_set_as_BackGround.Enabled = false;
             }
@@ -611,7 +611,17 @@ namespace CCD_controller_windows_form
         {
             if (CCD_Data == null) return;
 
-            if ((CCD_Data.Max<ushort>() != 0 || CCD_Data.Min<ushort>() != 0) && serialFiberAquisitionForm == null)
+            if ((CSV_CCD_Data.Max<float>() != 0 || CSV_CCD_Data.Min<float>() != 0) && serialFiberAquisitionForm == null)
+            {
+                serialFiberAquisitionForm = new SerialFiberAcquisitionForm(CSV_CCD_Data, xpixcel, ypixcel);
+                serialFiberAquisitionForm.TopLevel = false;
+                this.pnl_Window_Field.Controls.Add(serialFiberAquisitionForm);
+                serialFiberAquisitionForm.Show();
+
+                serialFiberAquisitionForm.calculate_separetePoint();
+                identificatePolymorphToolStripMenuItem.Enabled = true;
+            }
+            else if ((CCD_Data.Max<ushort>() != 0 || CCD_Data.Min<ushort>() != 0) && serialFiberAquisitionForm == null)
             {
                 serialFiberAquisitionForm = new SerialFiberAcquisitionForm(CCD_Data, xpixcel, ypixcel);
                 serialFiberAquisitionForm.TopLevel = false;
@@ -621,12 +631,14 @@ namespace CCD_controller_windows_form
                 if (background_CCD_Data != null) serialFiberAquisitionForm.set_BackGround_Image_for_ushort(background_CCD_Data);
 
                 serialFiberAquisitionForm.calculate_separetePoint();
+                identificatePolymorphToolStripMenuItem.Enabled = true;
             }
             else if ((CCD_Data.Max<ushort>() != 0 || CCD_Data.Min<ushort>() != 0) && serialFiberAquisitionForm != null)
             {
                 if (background_CCD_Data != null) serialFiberAquisitionForm.set_BackGround_Image_for_ushort(background_CCD_Data);
 
                 serialFiberAquisitionForm.calculate_separetePoint();
+                identificatePolymorphToolStripMenuItem.Enabled = true;
             }
         }
 
@@ -664,13 +676,12 @@ namespace CCD_controller_windows_form
                 col_index++;
             }
 
-            xpixcel = row_index;
-            ypixcel = col_index;
-
-            CCD_Data = Array.ConvertAll<float, ushort>((float[])data.ToArray().Clone(), (float i) => { return (ushort)i; });
-
             if (row_index > col_index)
             {
+                xpixcel = row_index;
+                ypixcel = col_index;
+
+                CCD_Data = Array.ConvertAll<float, ushort>((float[])data.ToArray().Clone(), (float i) => { return (ushort)Math.Abs(i); });
                 Import_Image_Viewer import_Image = new Import_Image_Viewer(CCD_Data, row_index, col_index);
                 import_Image.TopLevel = false;
                 this.pnl_Window_Field.Controls.Add(import_Image);
@@ -692,7 +703,11 @@ namespace CCD_controller_windows_form
                     }
                 }
 
-                Import_Image_Viewer import_Image = new Import_Image_Viewer(CCD_Data, row_index, col_index);
+                xpixcel = col_index;
+                ypixcel = row_index;
+
+                CCD_Data = Array.ConvertAll<float, ushort>((float[])data_T.ToArray().Clone(), (float i) => { return (ushort)Math.Abs(i); });
+                Import_Image_Viewer import_Image = new Import_Image_Viewer(CCD_Data, col_index, row_index);
                 import_Image.TopLevel = false;
                 this.pnl_Window_Field.Controls.Add(import_Image);
                 import_Image.Show();
@@ -826,7 +841,7 @@ namespace CCD_controller_windows_form
 
             try
             {
-                await Task.Delay(100);
+                await Task.Delay(10);
             }
             catch
             {
@@ -870,6 +885,128 @@ namespace CCD_controller_windows_form
 
                 return;
             }
+
+        }
+
+        private void importSubstructImageCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            string FilePath = openFileDialog.FileName;
+            int col_index = 0;
+            int row_index = 0;
+            List<float> data = new List<float>();
+
+
+            StreamReader reader = new StreamReader(FilePath);
+
+            while (!reader.EndOfStream)
+            {
+                string line = reader.ReadLine();
+                row_index = 0;
+                if (line == "")
+                {
+                    continue;
+                }
+                else
+                {
+                    foreach (string rowNumber in line.Split(','))
+                    {
+                        data.Add(float.Parse(rowNumber));
+                        row_index++;
+                    }
+                }
+                col_index++;
+            }
+
+            if (row_index > col_index)
+            {
+                xpixcel = row_index;
+                ypixcel = col_index;
+
+                CCD_Data = Array.ConvertAll<float, ushort>((float[])data.ToArray().Clone(), (float i) => { return (ushort)Math.Abs(i); });
+                CSV_CCD_Data = (float[])data.ToArray().Clone();
+
+                Import_Image_Viewer import_Image = new Import_Image_Viewer(CCD_Data, row_index, col_index);
+                import_Image.TopLevel = false;
+                this.pnl_Window_Field.Controls.Add(import_Image);
+                import_Image.Show();
+                import_Image.BringToFront();
+
+                return;
+            }
+            else
+            {
+                float[] data_T = new float[col_index * row_index];
+                float[] tmp_data = data.ToArray();
+
+                for (int i = 0; i < col_index; i++)
+                {
+                    for (int j = 0; j < row_index; j++)
+                    {
+                        data_T[j * col_index + i] = data[i * row_index + j];
+                    }
+                }
+
+                xpixcel = col_index;
+                ypixcel = row_index;
+
+                CCD_Data = Array.ConvertAll<float, ushort>((float[])data_T.ToArray().Clone(), (float i) => { return (ushort)Math.Abs(i); });
+                CSV_CCD_Data = (float[])data_T.ToArray().Clone();
+
+                Import_Image_Viewer import_Image = new Import_Image_Viewer(CCD_Data, col_index, row_index);
+                import_Image.TopLevel = false;
+                this.pnl_Window_Field.Controls.Add(import_Image);
+                import_Image.Show();
+                import_Image.BringToFront();
+
+                return;
+            }
+        }
+
+        private async void identificatePolymorphToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var sw = new System.Diagnostics.Stopwatch();
+            Several_Spectrum_Datum = serialFiberAquisitionForm.Get_Several_Spectrum_Datum();
+
+            int n_component = 3;
+            double[] St = new double[n_component * xpixcel];
+            double[] fitting_C = new double[37 * n_component];
+            double[] fitting_St = new double[n_component * xpixcel];
+
+            Random random = new Random();
+
+            for(int i = 0; i < n_component * xpixcel; i++)
+            {
+                St[i] = random.NextDouble();
+            }
+
+            double[] D = Array.ConvertAll<float, double>(Several_Spectrum_Datum.Cast<float>().ToArray(), (float i) => { return (double)i; });
+
+            import_DLL.MCR_ALS mcr = new import_DLL.MCR_ALS(100000);
+
+            sw.Start();
+            await Task.Run(() => mcr.fit(D, 37, xpixcel, n_component, null, St));
+            sw.Stop();
+
+            mcr.get_C(fitting_C, 37, n_component);
+            mcr.get_St(fitting_St, n_component, xpixcel);
+
+            mcr.Delete();
+
+            SeveralSpectrumForm = new SeveralSpectrumForm(fitting_St, n_component,xpixcel);
+            SeveralSpectrumForm.Text = $"Pure Spectrum ({sw.ElapsedMilliseconds} ms)";
+            SeveralSpectrumForm.Show();
+            
+            //Console.WriteLine("■処理Aにかかった時間");
+            //TimeSpan ts = sw.Elapsed;
+            //Console.WriteLine($"　{ts}");
+            //Console.WriteLine($"　{ts.Hours}時間 {ts.Minutes}分 {ts.Seconds}秒 {ts.Milliseconds}ミリ秒");
+            //Console.WriteLine($"　{sw.ElapsedMilliseconds}ミリ秒");
+
 
         }
     }

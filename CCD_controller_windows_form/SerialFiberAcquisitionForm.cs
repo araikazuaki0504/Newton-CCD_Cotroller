@@ -18,11 +18,13 @@ namespace CCD_controller_windows_form
         private ushort[] _Image;
         private float[] _Data;
         private float[] _BackGroundData;
-        private int[,] _Several_Spectrum_Datum;
+        private float[,] _Several_Spectrum_Datum;
         private int _Image_Width;
         private int _Image_Height;
-        private int _Fiber_qty = 7;
-        private float[] _Y_Bining_Image_Data;
+        private int _Fiber_qty = 37;
+        private int _first_point = 20;
+        private int _end_point = 373;
+        private float[] _Horizon_Bining_Image_Data;
         private float[] _Linspace_forX_Axis;
         private int _Calibration = 0;
         private Bitmap _bmp;
@@ -36,11 +38,11 @@ namespace CCD_controller_windows_form
         public SerialFiberAcquisitionForm(float[] Image, int Image_Width, int Image_Height)
         {
             InitializeComponent();
-            _Image = Array.ConvertAll<float, ushort>((float[])Image.Clone(), (float i) => { return (ushort)i; });
+            _Image = Array.ConvertAll<float, ushort>((float[])Image.Clone(), (float i) => { return (ushort)Math.Abs(i); });
             _Data = (float[])Image.Clone();
             _Image_Width = Image_Width;
             _Image_Height = Image_Height;
-            _Y_Bining_Image_Data = new float[_Image_Height + 1];
+            _Horizon_Bining_Image_Data = new float[_Image_Height + 1];
             _Linspace_forX_Axis = new float[_Image_Height + 1];
             _objPen = new Pen(Color.Blue, 1);
             _objPen.DashStyle = DashStyle.Dash;
@@ -57,7 +59,7 @@ namespace CCD_controller_windows_form
             _Data = Array.ConvertAll<ushort, float>((ushort[])Image.Clone(), (ushort i) => { return (float)i; });
             _Image_Width = Image_Width;
             _Image_Height = Image_Height;
-            _Y_Bining_Image_Data = new float[_Image_Height + 1];
+            _Horizon_Bining_Image_Data = new float[_Image_Height + 1];
             _Linspace_forX_Axis = new float[_Image_Height + 1];
             _objPen = new Pen(Color.Blue, 1);
             _objPen.DashStyle = DashStyle.Dash;
@@ -67,24 +69,9 @@ namespace CCD_controller_windows_form
             this.MinimumSize = this.Size;
         }
 
-        public void DO_SVD()
+        public float[,] Get_Several_Spectrum_Datum()
         {
-            int Matrix_Row = _Several_Spectrum_Datum.GetLength(1);
-            int Matrix_Col = _Several_Spectrum_Datum.GetLength(0);
-
-            int[] Several_Spectrum_Datum = _Several_Spectrum_Datum.Cast<int>().ToArray();
-            double[] data = Array.ConvertAll<int, double>(Several_Spectrum_Datum, (int i) => { return (double)i; });
-            double[] U = new double[Matrix_Col * Matrix_Col];
-            double[] S = new double[Matrix_Col * Matrix_Row];
-            double[] V = new double[Matrix_Row * Matrix_Row];
-
-            import_DLL.showMatrix(data, Matrix_Col, Matrix_Row);
-
-            import_DLL.SVD_double(data, Matrix_Col, Matrix_Row, U, S, V);
-
-            import_DLL.showMatrix(U, Matrix_Col, Matrix_Col);
-            import_DLL.showMatrix(S,Matrix_Col, Matrix_Row);
-            import_DLL.showMatrix(V, Matrix_Row, Matrix_Row);
+            return _Several_Spectrum_Datum;
         }
 
         public void calculate_separetePoint()
@@ -131,7 +118,7 @@ namespace CCD_controller_windows_form
 
             for (int i = 0; i < _Image_Height; i++)
             {
-                chrt_Seek_Peak_Graph.Series[name].Points.AddXY(_Linspace_forX_Axis[i], _Y_Bining_Image_Data[i]);
+                chrt_Seek_Peak_Graph.Series[name].Points.AddXY(_Linspace_forX_Axis[i], _Horizon_Bining_Image_Data[i]);
             }
 
             Axis axisX = chrt_Seek_Peak_Graph.ChartAreas[0].AxisX;
@@ -158,8 +145,8 @@ namespace CCD_controller_windows_form
         {
             Axis axisY = chrt_Seek_Peak_Graph.ChartAreas[0].AxisY;
             Axis axisY2 = chrt_Seek_Peak_Graph.ChartAreas[0].AxisY2;
-            double num = _Y_Bining_Image_Data.Skip(0).Take(_Y_Bining_Image_Data.Length).Min();
-            double num2 = _Y_Bining_Image_Data.Skip(0).Take(_Y_Bining_Image_Data.Length).Max();
+            double num = _Horizon_Bining_Image_Data.Skip(0).Take(_Horizon_Bining_Image_Data.Length).Min();
+            double num2 = _Horizon_Bining_Image_Data.Skip(0).Take(_Horizon_Bining_Image_Data.Length).Max();
             double num3 = num2 - num;
 
             if (num3 == 0.0)
@@ -208,7 +195,7 @@ namespace CCD_controller_windows_form
                 {
                     int num4 = i * width + j;
                     int num5 = i * width * num + j * num;
-                    double a = ((num3 == num2) ? ((double)((inBuffer[num4] - num2) * 65536)) : ((double)((inBuffer[num4] - num2) * 65536 / (num3 - num2))));
+                    double a = ((num3 == num2) ? ((double)((inBuffer[num4] - num2) * 8192)) : ((double)((inBuffer[num4] - num2) * 8192 / (num3 - num2))));
                     ushort value = (ushort)Math.Round(a);
                     byte b = BitConverter.GetBytes(value)[1];
                     byte b2 = BitConverter.GetBytes(value)[0];
@@ -237,15 +224,15 @@ namespace CCD_controller_windows_form
 
         private void Convert_Y_Binning_Data()
         {
-            if (_BackGroundData == null) read_defult_BackGroundImage();
-            float[] tmp_data = new float[_Image_Height * _Image_Width];
+            //if (_BackGroundData == null) read_defult_BackGroundImage();
+            //float[] tmp_data = new float[_Image_Height * _Image_Width];
+            //
+            //for(int i = 0; i < _Image_Width * _Image_Height; i++)
+            //{
+            //    tmp_data[i] = _Data[i] - _BackGroundData[i];
+            //}
 
-            for(int i = 0; i < _Image_Width * _Image_Height; i++)
-            {
-                tmp_data[i] = _Data[i] - _BackGroundData[i];
-            }
-
-            float[] Convolve_Data = Convolve2d(tmp_data,_Image_Width,_Image_Height,4);
+            float[] Convolve_Data = Convolve2d(_Data,_Image_Width,_Image_Height,4);
 
             float[] tmp_array = new float[_Image_Height];
             float Convolved_Data_Ave = Convolve_Data.Average();
@@ -254,7 +241,7 @@ namespace CCD_controller_windows_form
             {
                 for(int j = 0; j < _Image_Width + 1; j++)
                 {
-                    _Y_Bining_Image_Data[i] += (Convolve_Data[i * (_Image_Width + 1) + j] > Convolved_Data_Ave ? Convolve_Data[i * (_Image_Width + 1) + j] : 0);
+                    _Horizon_Bining_Image_Data[i] += (Convolve_Data[i * (_Image_Width + 1) + j] > Convolved_Data_Ave ? Convolve_Data[i * (_Image_Width + 1) + j] : 0);
                 }
             }
 
@@ -268,14 +255,14 @@ namespace CCD_controller_windows_form
 
                 float sum_for_ave = 0;
 
-                for(int j = i; j < i + endIndex; j++)sum_for_ave += _Y_Bining_Image_Data[j];
+                for(int j = i; j < i + endIndex; j++)sum_for_ave += _Horizon_Bining_Image_Data[j];
 
                 tmp_array[i] = sum_for_ave / endIndex;
             }
 
             float Minmum_number = tmp_array.Min();
 
-            for(int i = 0; i < _Image_Height; i++) _Y_Bining_Image_Data[i] = tmp_array[i] -  Minmum_number;
+            for(int i = 0; i < _Image_Height; i++) _Horizon_Bining_Image_Data[i] = tmp_array[i] -  Minmum_number;
         }
 
         float[] Derivative(float[] Data)
@@ -297,33 +284,39 @@ namespace CCD_controller_windows_form
         {
             int loopCounter = 0;
 
-            float[] tmp_Y_Binning_Image_Data = (float[])_Y_Bining_Image_Data.Clone();
-            bool[] sdiff_sign = new bool[_Image_Height - 1];
+            float[] tmp_Horizon_Bining_Image_Data = new float[_end_point - _first_point + 1];//new float[_Horizon_Bining_Image_Data.Length];
+            bool[] sdiff_sign = new bool[_end_point - _first_point];
             float[] tmp_array = new float[_Fiber_qty - 1];
             float[] target_point_x = new float[_Fiber_qty + 1];
             float[] target_point_y = new float[_Fiber_qty + 1];
 
-            for (int i = 0; i < _Image_Height; i++) tmp_Y_Binning_Image_Data[i] *= -1;
+            for(int i = 0; i < _end_point - _first_point + 1; i++)
+            {
+                int actual_index = i + _first_point;
+                tmp_Horizon_Bining_Image_Data[i] = _Horizon_Bining_Image_Data[actual_index];
+            }
 
-            float[] sdiff = Derivative(tmp_Y_Binning_Image_Data);
+            for (int i = 0; i < _end_point - _first_point + 1; i++) tmp_Horizon_Bining_Image_Data[i] *= -1;
 
-            for(int i = 0; i < _Image_Height - 2; i++)
+            float[] sdiff = Derivative(tmp_Horizon_Bining_Image_Data);
+
+            for(int i = 0; i < _end_point - _first_point - 1; i++)
             {
                 sdiff_sign[i] = ((sdiff[i] * sdiff[i + 1] < 0) && (sdiff[i] > 0));
             }
 
             int tmp_size =  sdiff_sign.Sum((sign) => { if (sign) return 1; else return 0; });
 
-
             float[] tmp_x = new float[tmp_size];
             float[] tmp_y = new float[tmp_size];
 
-            for(int i = 0; i <  _Image_Height - 2; i++)
+            for(int i = 0; i < _end_point - _first_point; i++)
             {
+                int actual_index = i + _first_point;
                 if (sdiff_sign[i])
                 {
-                    tmp_x[loopCounter] = i + 1;
-                    tmp_y[loopCounter] = _Y_Bining_Image_Data[i + 1];
+                    tmp_x[loopCounter] = actual_index + 1;
+                    tmp_y[loopCounter] = _Horizon_Bining_Image_Data[actual_index + 1];
                     loopCounter++;
                 }
             }
@@ -340,12 +333,12 @@ namespace CCD_controller_windows_form
                 target_point_x[i + 1] = tmp_x[(int)tmp_array[i]];
             }
 
-            Array.Sort(tmp_array);
 
-            target_point_x[0] = tmp_x[(int)tmp_array[0] - 1] + _Calibration;//0
-            target_point_x[target_point_x.Length - 1] = tmp_x[(int)tmp_array[tmp_array.Length - 1] + 1] - _Calibration;//263;
+            target_point_x[0] = _first_point;//0
+            target_point_x[target_point_x.Length - 1] = _end_point;//263;
 
             float[] tmp = (float[])tmp_y.Clone();
+            //Array.Sort(tmp_array);
 
             Array.Sort(tmp);
             Array.Reverse(tmp);
@@ -355,8 +348,8 @@ namespace CCD_controller_windows_form
                 target_point_y[i + 1] = tmp[i];
             }
 
-            target_point_y[0] = tmp_y[(int)tmp_array[0] - 1] + _Calibration;// tmp_Y_Binning_Image_Data[0];
-            target_point_y[target_point_y.Length - 1] = tmp_y[(int)tmp_array[tmp_array.Length - 1] + 1] - _Calibration; //tmp_Y_Binning_Image_Data[263];
+            target_point_y[0] = _Horizon_Bining_Image_Data[_first_point];// tmp_Horizon_Bining_Image_Data[0];
+            target_point_y[target_point_y.Length - 1] = _Horizon_Bining_Image_Data[_end_point]; //tmp_Horizon_Bining_Image_Data[263];
 
             float[] Separete_Point = (float[])target_point_x.Clone();
 
@@ -408,7 +401,7 @@ namespace CCD_controller_windows_form
             float[] Separete_Point = Find_Separete_Point();
             DrawLine_To_CCDImage(Separete_Point);
 
-            _Several_Spectrum_Datum = new int[_Fiber_qty, _Image_Width];
+            _Several_Spectrum_Datum = new float[_Fiber_qty, _Image_Width];
 
             for (int i = 0; i < _Fiber_qty; i++)
             {
@@ -419,13 +412,13 @@ namespace CCD_controller_windows_form
                 {
                     for (int k = 0; k < _Image_Width; k++)
                     {
-                        _Several_Spectrum_Datum[i, k] += _Image[j * _Image_Width + k];
+                        _Several_Spectrum_Datum[i, k] += _Data[j * _Image_Width + k];
                     }
                 }
             }
 
-            _SeveralSpectrumform = new SeveralSpectrumForm(_Several_Spectrum_Datum);
-            _SeveralSpectrumform.Show();
+            //_SeveralSpectrumform = new SeveralSpectrumForm(_Several_Spectrum_Datum);
+            //_SeveralSpectrumform.Show();
         }
 
         private void bttn_Close_Click(object sender, EventArgs e)
