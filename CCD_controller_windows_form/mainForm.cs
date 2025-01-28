@@ -332,11 +332,11 @@ namespace CCD_controller_windows_form
 
             if (rdBttn_ms_forExpTime.Checked)
             {
-                text = "Exposure set to " + set_time.ToString() + " ms";
+                text = "Exposure set to " + nmrcUpDwn_Exposure_Time.Value.ToString() + " ms";
             }
             else
             {
-                text = "Exposure set to " + set_time.ToString() + " s";
+                text = "Exposure set to " + nmrcUpDwn_Exposure_Time.Value.ToString() + " s";
             }
 
             lbl_Set_ExposureTime.Text = text;
@@ -845,6 +845,15 @@ namespace CCD_controller_windows_form
             if (chckBx_continuous.Checked)
             {
                 chckBx_set_as_BackGround.Checked = false;
+                chckBx_Write_CSV.Checked = false;
+            }
+        }
+
+        private void chckBx_Write_CSV_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chckBx_Write_CSV.Checked)
+            {
+                chckBx_continuous.Checked = false;
             }
         }
 
@@ -1112,6 +1121,20 @@ namespace CCD_controller_windows_form
             SeveralSpectrumForm.Text = $"Pure Spectrum ({sw.ElapsedMilliseconds} ms)";
             SeveralSpectrumForm._Is_Button_Clicked += SeveralSpectrumForm_Button_Clicked;
             SeveralSpectrumForm.Show();
+        }
+
+        private void rdBttn_ms_forExpTime_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdBttn_ms_forExpTime.Checked)
+            {
+                nmrcUpDwn_Exposure_Time.Maximum = 10000;
+                nmrcUpDwn_Exposure_Time.Minimum = 20;
+            }
+            else
+            {
+                nmrcUpDwn_Exposure_Time.Maximum = 10;
+                nmrcUpDwn_Exposure_Time.Minimum = 0.02M;
+            }
         }
     }
 }

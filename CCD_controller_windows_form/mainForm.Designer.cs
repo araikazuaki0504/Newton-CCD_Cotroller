@@ -244,6 +244,7 @@
             this.chckBx_Write_CSV.TabIndex = 16;
             this.chckBx_Write_CSV.Text = "Write CSV";
             this.chckBx_Write_CSV.UseVisualStyleBackColor = true;
+            this.chckBx_Write_CSV.CheckedChanged += new System.EventHandler(this.chckBx_Write_CSV_CheckedChanged);
             // 
             // lbl_set_FrameRate
             // 
@@ -433,18 +434,29 @@
             this.rdBttn_ms_forExpTime.TabStop = true;
             this.rdBttn_ms_forExpTime.Text = "ms";
             this.rdBttn_ms_forExpTime.UseVisualStyleBackColor = true;
+            this.rdBttn_ms_forExpTime.CheckedChanged += new System.EventHandler(this.rdBttn_ms_forExpTime_CheckedChanged);
             // 
             // nmrcUpDwn_Exposure_Time
             // 
             this.nmrcUpDwn_Exposure_Time.Font = new System.Drawing.Font("MS UI Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.nmrcUpDwn_Exposure_Time.Location = new System.Drawing.Point(142, 34);
             this.nmrcUpDwn_Exposure_Time.Margin = new System.Windows.Forms.Padding(2);
+            this.nmrcUpDwn_Exposure_Time.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nmrcUpDwn_Exposure_Time.Minimum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.nmrcUpDwn_Exposure_Time.Name = "nmrcUpDwn_Exposure_Time";
             this.nmrcUpDwn_Exposure_Time.Size = new System.Drawing.Size(87, 24);
             this.nmrcUpDwn_Exposure_Time.TabIndex = 4;
             this.nmrcUpDwn_Exposure_Time.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nmrcUpDwn_Exposure_Time.Value = new decimal(new int[] {
-            1,
+            20,
             0,
             0,
             0});

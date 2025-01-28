@@ -15,6 +15,7 @@ namespace CCD_controller_windows_form
     public partial class SerialFiberAcquisitionForm : Form
     {
         private bool _Do_create_bmp = false;
+        private bool _isSubstract = false;
         private ushort[] _Image;
         private float[] _Data;
         private float[] _BackGroundData;
@@ -23,7 +24,7 @@ namespace CCD_controller_windows_form
         private int _Image_Height;
         private int _Fiber_qty = 37;
         private int _first_point = 20;
-        private int _end_point = 373;
+        private int _end_point = 380;
         private float[] _Horizon_Bining_Image_Data;
         private float[] _Linspace_forX_Axis;
         private Bitmap _bmp;
@@ -48,6 +49,7 @@ namespace CCD_controller_windows_form
             plotDataBackgroundSubtractCheck();
             this.MaximumSize = this.Size;
             this.MinimumSize = this.Size;
+            _isSubstract = true;
         }
 
         public SerialFiberAcquisitionForm(ushort[] Image, int Image_Width, int Image_Height)
@@ -225,15 +227,20 @@ namespace CCD_controller_windows_form
 
         private void Convert_Y_Binning_Data()
         {
-            //if (_BackGroundData == null) read_defult_BackGroundImage();
-            //float[] tmp_data = new float[_Image_Height * _Image_Width];
-            //
-            //for(int i = 0; i < _Image_Width * _Image_Height; i++)
-            //{
-            //    tmp_data[i] = _Data[i] - _BackGroundData[i];
-            //}
+            float[] tmp_data = null;
 
-            float[] Convolve_Data = Convolve2d(_Data,_Image_Width,_Image_Height,4);
+            if (!_isSubstract)
+            {
+                if (_BackGroundData == null) read_defult_BackGroundImage();
+                tmp_data = new float[_Image_Height * _Image_Width];
+
+                for (int i = 0; i < _Image_Width * _Image_Height; i++)
+                {
+                    tmp_data[i] = _Data[i] - _BackGroundData[i];
+                }
+            }
+
+            float[] Convolve_Data = Convolve2d((_isSubstract  ? _Data : tmp_data),_Image_Width,_Image_Height,4);
 
             float[] tmp_array = new float[_Image_Height];
             float Convolved_Data_Ave = Convolve_Data.Average();
