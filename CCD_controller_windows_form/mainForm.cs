@@ -286,6 +286,8 @@ namespace CCD_controller_windows_form
                     return false;
                 }
 
+                AndorSDK.SetImage(1, 1, 1, xpixcel, 1, ypixcel);
+
                 CCD_Data_Size = (uint)(xpixcel * ypixcel);
                 CCD_Data = new ushort[CCD_Data_Size];
             }
@@ -317,11 +319,11 @@ namespace CCD_controller_windows_form
 
             if (rdBttn_ms_forExpTime.Checked)
             {
-                set_time = (float)nmrcUpDwn_Exposure_Time.Value;
+                set_time = (float)nmrcUpDwn_Exposure_Time.Value / 1000;
             }
             else
             {
-                set_time = (float)nmrcUpDwn_Exposure_Time.Value / 1000;
+                set_time = (float)nmrcUpDwn_Exposure_Time.Value;
             }
 
             errorValue = AndorSDK.SetExposureTime(set_time);
@@ -345,6 +347,7 @@ namespace CCD_controller_windows_form
             if (camera_datagraphform == null || camera_datagraphform.Text == "")
             {
                 camera_datagraphform = new DisplayGraphForm(Sequential_number_ZeroToXpixcel, _spectrum, "Spectrum", unit);
+                camera_datagraphform.TopLevel = false;
                 pnl_Window_Field.Controls.Add(camera_datagraphform);
                 camera_datagraphform.Show();
             }
@@ -361,6 +364,7 @@ namespace CCD_controller_windows_form
             if (CCDImage_viewer == null)
             {
                 CCDImage_viewer = new Import_Image_Viewer(ccd_Data, xpixcel, ypixcel);
+                CCDImage_viewer.TopLevel = false;
                 pnl_Window_Field.Controls.Add(CCDImage_viewer);
                 CCDImage_viewer.Show();
             }
@@ -456,11 +460,11 @@ namespace CCD_controller_windows_form
                         Temperature_timer.Start();
                         bttn_Acquire_Frame.Enabled = true;
                         bttn_Stop.Enabled = false;
-
+                    
                         return;
                     }
 
-                    float TimeOut = exposure_tim + accumulat_time + kinetic_time;
+                    float TimeOut = (exposure_tim + accumulat_time + kinetic_time) * 1000;
 
                     while ((nmrcUpDwn_Number_of_Frame.Value > frame_num || chckBx_continuous.Checked) && !exposure_tokenSource.IsCancellationRequested)
                     {
@@ -508,7 +512,7 @@ namespace CCD_controller_windows_form
                             displayImage(CCD_Data);
                         }
 
-                        if (chckBx_Write_CSV.Checked)
+                        if (chckBx_Write_CSV.Checked && !chckBx_continuous.Checked)
                         {
                             DateTime Now_Date_Data = DateTime.Now;
                             string File_Name = "CCDImage_" + Now_Date_Data.Year.ToString() + Now_Date_Data.Month.ToString() + Now_Date_Data.Day.ToString() + Now_Date_Data.Hour.ToString() + Now_Date_Data.Minute.ToString() + frame_num.ToString() + ".csv";
@@ -617,7 +621,7 @@ namespace CCD_controller_windows_form
         {
             if (CCD_Data == null) return;
 
-            if ((CSV_CCD_Data.Max<float>() != 0 || CSV_CCD_Data.Min<float>() != 0) && serialFiberAquisitionForm == null)
+            if (CSV_CCD_Data != null && (CSV_CCD_Data.Max<float>() != 0 || CSV_CCD_Data.Min<float>() != 0) && serialFiberAquisitionForm == null)
             {
                 serialFiberAquisitionForm = new SerialFiberAcquisitionForm(CSV_CCD_Data, xpixcel, ypixcel);
                 serialFiberAquisitionForm.TopLevel = false;
@@ -629,7 +633,7 @@ namespace CCD_controller_windows_form
                 identificatePolymorphToolStripMenuItem.Enabled = true;
                 Fiber_qty = serialFiberAquisitionForm.get_Fiber_qty();
             }
-            else if((CSV_CCD_Data.Max<float>() != 0 || CSV_CCD_Data.Min<float>() != 0) && serialFiberAquisitionForm != null)
+            else if(CSV_CCD_Data != null && (CSV_CCD_Data.Max<float>() != 0 || CSV_CCD_Data.Min<float>() != 0) && serialFiberAquisitionForm != null)
             {
                 serialFiberAquisitionForm.Clear();
                 serialFiberAquisitionForm.calculate_separetePoint();

@@ -59,7 +59,9 @@ namespace CCD_controller_windows_form
 
             plotDataBackgroundSubtractCheck();
 
-            _CCDImage_View_form.change_Image(_bmp);
+            this.pctrBx_CCD_Image.Image = _bmp;
+
+            if (_CCDImage_View_form != null)_CCDImage_View_form.change_Image(_bmp);
         }
 
         private void plotDataBackgroundSubtractCheck()

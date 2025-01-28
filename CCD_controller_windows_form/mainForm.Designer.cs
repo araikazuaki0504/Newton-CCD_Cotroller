@@ -439,11 +439,6 @@
             this.nmrcUpDwn_Exposure_Time.Font = new System.Drawing.Font("MS UI Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.nmrcUpDwn_Exposure_Time.Location = new System.Drawing.Point(142, 34);
             this.nmrcUpDwn_Exposure_Time.Margin = new System.Windows.Forms.Padding(2);
-            this.nmrcUpDwn_Exposure_Time.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nmrcUpDwn_Exposure_Time.Name = "nmrcUpDwn_Exposure_Time";
             this.nmrcUpDwn_Exposure_Time.Size = new System.Drawing.Size(87, 24);
             this.nmrcUpDwn_Exposure_Time.TabIndex = 4;
