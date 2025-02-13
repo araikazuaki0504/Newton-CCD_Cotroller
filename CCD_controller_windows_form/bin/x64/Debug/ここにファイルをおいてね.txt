@@ -1,5 +1,0 @@
-atmcd64d.dll
-libopenblas.dll
-opencv_world4100d.dll
-
-上記のdllファイルをおいてね
