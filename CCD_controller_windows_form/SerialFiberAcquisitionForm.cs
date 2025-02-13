@@ -234,6 +234,9 @@ namespace CCD_controller_windows_form
                 if (_BackGroundData == null) read_defult_BackGroundImage();
                 tmp_data = new float[_Image_Height * _Image_Width];
 
+                _BackGroundData = Convolve2d(_BackGroundData, _Image_Width, _Image_Height, 4);
+
+
                 for (int i = 0; i < _Image_Width * _Image_Height; i++)
                 {
                     tmp_data[i] = _Data[i] - _BackGroundData[i];
@@ -415,13 +418,15 @@ namespace CCD_controller_windows_form
             {
                 float start_index = Separete_Point[i];
                 float end_index = Separete_Point[i + 1];
+                float width_size = end_index - start_index;
 
                 for (int j = (int)start_index; j < end_index; j++)
                 {
                     for (int k = 0; k < _Image_Width; k++)
                     {
-                        _Several_Spectrum_Datum[i, k] += _Data[j * _Image_Width + k];
+                        _Several_Spectrum_Datum[i, k] += _Data[j * _Image_Width + k] / width_size;
                     }
+
                 }
             }
 

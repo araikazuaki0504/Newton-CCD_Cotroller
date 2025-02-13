@@ -22,9 +22,9 @@ namespace CCD_controller_windows_form
         private bool isSameAppRunning = false;
         private CancellationTokenSource exposure_tokenSource = new CancellationTokenSource();
 
-        private const int defult_CCD_Temp = -20;
+        private const int defult_CCD_Temp = -60;
         private string unit = "Pixel";
-        private string CSV_Save_Path = "";
+        private string CSV_Save_Path = @"C:\CCD_controller_windows_form(Newton)\CSV\";
 
         private AndorSDK.AndorCapabilities caps;
         private string model_number;
@@ -1019,6 +1019,7 @@ namespace CCD_controller_windows_form
 
         private void SeveralSpectrumForm_Button_Clicked(object sender, EventArgs e)
         {
+            double[] tmp_array = new double[Fiber_qty];
             double[] Polymorph_Ratio = new double[Fiber_qty];
             int[] Selected_Spectrum_index = SeveralSpectrumForm.Get_Selected_Spectrum();
             int Picture_Width = 0;
@@ -1030,11 +1031,17 @@ namespace CCD_controller_windows_form
 
                 foreach (int index in Selected_Spectrum_index)
                 {
-                    tmp += fitting_St[i * n_component + index];
+                    tmp += fitting_C[i * n_component + index] * 0.8;
                 }
 
-                Polymorph_Ratio[i] = fitting_St[i * n_component + Selected_Spectrum_index[0]] / tmp;
+                tmp_array[i] = fitting_C[i * n_component + Selected_Spectrum_index[0]] / tmp;
             }
+
+            for(int i = 0; i < Fiber_qty; i++)
+            {
+                Polymorph_Ratio[i] = (tmp_array[i] - tmp_array.Min()) / (tmp_array.Max() - tmp_array.Min());
+            }
+
 
             import_DLL.DataToImage dataToImage = new import_DLL.DataToImage(Polymorph_Ratio, 500, 500);
 

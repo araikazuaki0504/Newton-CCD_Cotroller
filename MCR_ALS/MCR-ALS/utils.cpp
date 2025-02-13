@@ -532,10 +532,10 @@ int nnls(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Mat
                     //x[i] = s[i];       
                 }
 
-                if(new_sub_Matrix != nullptr)delete[] new_sub_Matrix;
-                if(new_sub_vector != nullptr)delete[] new_sub_vector;
-                if(tmp_sub != nullptr)delete[] tmp_sub;
-                if(inds != nullptr)delete[] inds;
+                /*if (new_sub_Matrix != nullptr)*/delete[] new_sub_Matrix;
+                /*if(new_sub_vector != nullptr)*/delete[] new_sub_vector;
+                /*if(tmp_sub != nullptr)*/delete[] tmp_sub;
+                /*if(inds != nullptr)*/delete[] inds;
             }
 
 
@@ -548,24 +548,24 @@ int nnls(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Mat
             //showMatrix(x,1,Matrix_A_row_,true);
             //showMatrix(w,1,Matrix_B_colunm_);
 
-            if(tmp_vector != nullptr)delete[] tmp_vector;
+            /*if (tmp_vector != nullptr)*/delete[] tmp_vector;
 
-            if(new_Matrix != nullptr)delete[] new_Matrix;
-            if(new_vector != nullptr)delete[] new_vector;
-            if(tmp != nullptr)delete[] tmp;
+            /*if(new_Matrix != nullptr)*/delete[] new_Matrix;
+            /*if(new_vector != nullptr)*/delete[] new_vector;
+            /*if(tmp != nullptr)*/delete[] tmp;
 
             if(iter == maxiter)
             {
                 for(int j = 0; j < cal_result->_solution_colunm_size; j++)cal_result->_lstsq_solution[j * cal_result->_solution_row_size + i] = x[j];
                 cal_result->_residues = nullptr;
-                if (Matrix_A_T != nullptr)delete[] Matrix_A_T;
-                if (AtA != nullptr)delete[] AtA;
-                if (AtB != nullptr)delete[] AtB;
-                if (x != nullptr)delete[] x;
-                if (s != nullptr)delete[] s;
-                if (P != nullptr)delete[] P;
-                if (w != nullptr)delete[] w;
-                if (vector_B_from_MatrixB != nullptr)delete[] vector_B_from_MatrixB;
+                /*if (Matrix_A_T != nullptr)*/delete[] Matrix_A_T;
+                /*if (AtA != nullptr)*/delete[] AtA;
+                /*if (AtB != nullptr)*/delete[] AtB;
+                /*if (x != nullptr)*/delete[] x;
+                /*if (s != nullptr)*/delete[] s;
+                /*if (P != nullptr)*/delete[] P;
+                /*if (w != nullptr)*/delete[] w;
+                /*if (vector_B_from_MatrixB != nullptr)*/delete[] vector_B_from_MatrixB;
                 return -1;
             }
         }
@@ -580,20 +580,20 @@ int nnls(double* Matrix_A, int Matrix_A_colunm_,  int Matrix_A_row_, double* Mat
         //残差計算
         cal_result->_residues[i] = norm(tmp_vector, Matrix_A_row_);
 
-        if(tmp_vector != nullptr)delete[] tmp_vector;
+        /*if (tmp_vector != nullptr)*/delete[] tmp_vector;
 
         //showMatrix(AtB,1,cal_result->_solution_colunm_size);
 
     }
 
-    if (Matrix_A_T != nullptr)delete[] Matrix_A_T;
-    if (AtA != nullptr)delete[] AtA;
-    if (AtB != nullptr)delete[] AtB;
-    if (x != nullptr)delete[] x;
-    if (s != nullptr)delete[] s;
-    if (P != nullptr)delete[] P;
-    if (w != nullptr)delete[] w;
-    if (vector_B_from_MatrixB != nullptr)delete[] vector_B_from_MatrixB;
+    /*if (Matrix_A_T != nullptr)*/delete[] Matrix_A_T;
+    /*if (AtA != nullptr)*/delete[] AtA;
+    /*if (AtB != nullptr)*/delete[] AtB;
+    /*if (x != nullptr)*/delete[] x;
+    /*if (s != nullptr)*/delete[] s;
+    /*if (P != nullptr)*/delete[] P;
+    /*if (w != nullptr)*/delete[] w;
+    /*if (vector_B_from_MatrixB != nullptr)*/delete[] vector_B_from_MatrixB;
 
     //std::cout << "end None Negative Least square..." << std::endl;
     return 1;

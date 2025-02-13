@@ -134,7 +134,7 @@
             this.nmrcUpDwn_Setting_Temperature.TabIndex = 0;
             this.nmrcUpDwn_Setting_Temperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nmrcUpDwn_Setting_Temperature.Value = new decimal(new int[] {
-            20,
+            60,
             0,
             0,
             -2147483648});
@@ -172,9 +172,9 @@
             this.lbl_CCD_Temp.Location = new System.Drawing.Point(162, 56);
             this.lbl_CCD_Temp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_CCD_Temp.Name = "lbl_CCD_Temp";
-            this.lbl_CCD_Temp.Size = new System.Drawing.Size(40, 17);
+            this.lbl_CCD_Temp.Size = new System.Drawing.Size(47, 17);
             this.lbl_CCD_Temp.TabIndex = 3;
-            this.lbl_CCD_Temp.Text = "????";
+            this.lbl_CCD_Temp.Text = "-59.7";
             // 
             // lbl_PCB_Temp
             // 
@@ -410,6 +410,7 @@
             // 
             this.rdBttn_s_forExpTime.AutoSize = true;
             this.rdBttn_s_forExpTime.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rdBttn_s_forExpTime.Checked = true;
             this.rdBttn_s_forExpTime.Font = new System.Drawing.Font("MS UI Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdBttn_s_forExpTime.Location = new System.Drawing.Point(12, 29);
             this.rdBttn_s_forExpTime.Margin = new System.Windows.Forms.Padding(2);
@@ -424,14 +425,12 @@
             // 
             this.rdBttn_ms_forExpTime.AutoSize = true;
             this.rdBttn_ms_forExpTime.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rdBttn_ms_forExpTime.Checked = true;
             this.rdBttn_ms_forExpTime.Font = new System.Drawing.Font("MS UI Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdBttn_ms_forExpTime.Location = new System.Drawing.Point(2, 2);
             this.rdBttn_ms_forExpTime.Margin = new System.Windows.Forms.Padding(2);
             this.rdBttn_ms_forExpTime.Name = "rdBttn_ms_forExpTime";
             this.rdBttn_ms_forExpTime.Size = new System.Drawing.Size(44, 18);
             this.rdBttn_ms_forExpTime.TabIndex = 0;
-            this.rdBttn_ms_forExpTime.TabStop = true;
             this.rdBttn_ms_forExpTime.Text = "ms";
             this.rdBttn_ms_forExpTime.UseVisualStyleBackColor = true;
             this.rdBttn_ms_forExpTime.CheckedChanged += new System.EventHandler(this.rdBttn_ms_forExpTime_CheckedChanged);
@@ -447,7 +446,7 @@
             0,
             0});
             this.nmrcUpDwn_Exposure_Time.Minimum = new decimal(new int[] {
-            20,
+            10,
             0,
             0,
             0});
@@ -456,7 +455,7 @@
             this.nmrcUpDwn_Exposure_Time.TabIndex = 4;
             this.nmrcUpDwn_Exposure_Time.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nmrcUpDwn_Exposure_Time.Value = new decimal(new int[] {
-            20,
+            10,
             0,
             0,
             0});
@@ -486,7 +485,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1126, 28);
+            this.menuStrip.Size = new System.Drawing.Size(1126, 30);
             this.menuStrip.TabIndex = 2;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -497,7 +496,7 @@
             this.importBackGroundImageToolStripMenuItem,
             this.importSubstructImageCSVToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // importCsvToolStripMenuItem
@@ -528,7 +527,7 @@
             this.triggerModeSettingToolStripMenuItem,
             this.automaticalShutDownToolStripMenuItem});
             this.cCDCameraSettingToolStripMenuItem.Name = "cCDCameraSettingToolStripMenuItem";
-            this.cCDCameraSettingToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
+            this.cCDCameraSettingToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.cCDCameraSettingToolStripMenuItem.Text = "CCD Camera Setting";
             // 
             // ROISettingToolStripMenuItem
@@ -559,7 +558,7 @@
             this.serialFiberAquisitionToolStripMenuItem,
             this.identificatePolymorphToolStripMenuItem});
             this.analizeToolStripMenuItem.Name = "analizeToolStripMenuItem";
-            this.analizeToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.analizeToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
             this.analizeToolStripMenuItem.Text = "Analysis";
             // 
             // serialFiberAquisitionToolStripMenuItem
